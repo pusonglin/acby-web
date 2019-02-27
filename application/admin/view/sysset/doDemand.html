@@ -1,0 +1,49 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>类型名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="name"  lay-verify="required" placeholder="请填写类型名称" autocomplete="off" class="layui-input" value="{$cur.name}" />
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>积分</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="integral"  lay-verify="required|number" placeholder="请填写积分（大于等于0的整数）" autocomplete="off" class="layui-input" value="{$cur.integral}" />
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>信用分</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="credit_score"  lay-verify="required|number" placeholder="请填写信用分（大于等于0的整数）" autocomplete="off" class="layui-input" value="{$cur.credit_score}" />
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneDemand')}" data-back="{:url('demand')}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

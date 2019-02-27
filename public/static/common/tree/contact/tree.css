@@ -1,0 +1,54 @@
+﻿input[type=checkbox]{display: none;}
+*{font-size: 13px;margin: 0;padding: 0;}
+.fl{float: left}
+.fr{float: right}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {width: 6px;  height: 6px;  background-color: #F5F5F5;  }
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);  border-radius: 5px;  background-color: #F5F5F5;  }
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {  border-radius: 5px;  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.1);  background-color: #999;  }
+
+/*选择区域*/
+.select-box{width:95%;height: 500px;;overflow: hidden;margin: 0px auto;}
+.select-box .ul-left,.ul-right{width: 48%;height: 400px;overflow: auto;background: #F4F6F8;;border: 1px solid #DEDEDE;margin:0;padding: 0;border-radius: 5px;}
+.check_list,.check_list_unable { display:inline-block; width:20px; height:20px;cursor: pointer;  background:url(./images/icon_check.svg) no-repeat top center ; background-size:cover;margin: 2px 5px 0 0;float: left;}
+.check_active { background:url(./images/icon_checked.svg) no-repeat top center ; background-size:cover;}
+.tree-icon-top{background:url(./images/icon_tree.png) no-repeat center left;background-size:18px auto;}
+.tree-icon-open{background:url(./images/icon_open.png) no-repeat center left;background-size:16px auto;}
+.tree-icon-close{background:url(./images/icon_close.png) no-repeat center left;background-size:16px auto;}
+.tree-icon-empty{background:url(./images/icon_empty.png) no-repeat center left;background-size:16px auto;}
+.tree-icon-user{background:url(./images/icon_user.png) no-repeat center left;background-size:16px auto;}
+.ul-title,.ul-bottom{width: 100%;height: 40px;overflow: hidden;}
+.ul-title li,.ul-bottom li{width: calc(50% - 40px);float: left;height: 40px;line-height:40px;display: inline-block;padding:0 20px;font-size: 14px;}
+.ul-bottom{padding-top: 10px;}
+.ul-bottom li a{margin-top:8px;width: 80px;height: 30px;background: red;display: inline-block;line-height: 30px;text-align: center;border-radius: 5px;cursor: pointer;}
+.ul-bottom li a:hover{ opacity: 0.8}
+.ul-bottom li .btn-sure{border: 1px solid #38adff; background: #38adff; color: #fff}
+.ul-bottom li .btn-cancel{ border: 1px solid #dcdcdc; background: #fff}
+.ul-right li{display: inline-block;font-size: 12px;border: 1px solid #e2e2e2;padding: 3px 28px 3px 6px;margin-top:10px;margin-left: 10px;border-radius: 3px;background:#e2e2e2 url(./images/icon_del.svg) no-repeat calc(100% - 4px) center;background-size:16px auto;}
+
+
+/*tree*/
+.tree {width: calc(100% - 32px); position: relative;margin: 0;padding: 0;}
+.tree ul{position: relative;margin: 0;padding: 0;}
+.tree li {min-width:90%;float: left; list-style-type:none;height: auto; padding:0px 5px 0 5px;  position:relative;  cursor: pointer; margin-left: 18px;display: block;}
+.tree li::before, .tree li::after {  content:'';  left:-10px;  position:absolute;  right:auto  }
+.tree li::before {  border-left:1px solid #DEDEDE;  bottom:50px;  height:100%;  top:0;  width:1px;  }
+.tree li::after {  border-bottom:1px solid #DEDEDE;  height:15px;  top:0px;  width:12px;border-radius:0 0 0 4px;  }
+.tree li span {width:100%;height:30px;float: left; -moz-border-radius:5px;  -webkit-border-radius:5px;display:inline-block; text-decoration:none;  vertical-align: middle;line-height: 30px;font-size: 14px;white-space: nowrap;text-overflow: ellipsis;  }
+.tree li span i{ float: left; text-align: center; display: inline-block;height:30px;line-height:30px;margin: 0px 5px 0px 0;padding-left: 25px;font-style: normal; }
+.tree li > ul >li{display: none;}
+.tree li.parent_li>span {  cursor:pointer  }
+.tree>ul>li::before, .tree>ul>li::after {  border:0  }
+.tree li:last-child::before {  height:15px  }
+.tree li.parent_li>span:hover,.tree li.parent_li>span:hover+ul li span {color:#000;}
+.tree label{  float: left;  height: 20px;  line-height: 20px;margin-top: 2px; }
+
+.contactsSearch{border: 1px solid #dedede;border-radius: 4px; background: #fff; overflow: hidden; padding:2% 1%;margin:10px 25px;}
+.contactsSearch>img{ width: 20px; height: 20px; float: left; margin: 2px 0  0 5px}
+.contactsSearch>input{ font-size: 14px; color: #333; line-height: 20px; float: left; border: none; outline: none; width: 85%; margin:  2px 0 0 5px }
+
+.nodata{background: #f9f9f9;display: block;height: 50px;line-height: 50px;text-align: center;width: 95%;margin: 0 auto;color: #999;}
+
+

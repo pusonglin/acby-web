@@ -1,0 +1,56 @@
+<extend name="public/base" />
+<block name='js'>
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.config.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.all.min.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/lang/zh-cn/zh-cn.js" />
+    <js href="__JS__/ueditor.js" />
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>主题名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="name"  lay-verify="required" placeholder="请填写主题名称" autocomplete="off" class="layui-input" value="{$cur.name}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>是否发布</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="status" value="1" title="是" <neq name="cur.status" value="2"> checked="checked"</neq> />
+                                        <input type="radio" name="status" value="2" title="否" <eq name="cur.status" value="2"> checked="checked"</eq> />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneTheme')}" data-back="{:url('theme')}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="footer">
+    <script type="text/javascript">
+        //封面图片上传
+        upload_imgs('cover');
+
+        //图片放大显示
+        fancyimg();
+    </script>
+</block>

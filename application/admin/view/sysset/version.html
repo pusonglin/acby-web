@@ -1,0 +1,88 @@
+<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">APP版本</li>
+                    <eq name='_right.delVersion' value='1'>
+                        <button data-href="{:url('delVersion')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name='_right.doVersion' value='1'>
+                        <button data-href="{:url('doVersion')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加版本</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.version" data-type="like" autocomplete="off" placeholder="版本号...">
+                            </div>
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search start-end" data-name="a.create_time" data-type="between" autocomplete="off" placeholder="开始时间 ~ 截止时间" readonly>
+                            </div>
+                            <div class="layui-inline">
+                                <select class="reload-search" data-name="a.type" data-type="eq" placeholder="全部">
+                                    <option value="">全部</option>
+                                    <option value="1">IOS</option>
+                                    <option value="2">Android</option>
+                                </select>
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--操作状态-->
+    <script type="text/html" id="tpl_type">
+        {{# if(d.type == 1){ }}
+        IOS
+        {{# }else{ }}
+        Android
+        {{# } }}
+    </script>
+
+    <!--强制更新-->
+    <script type="text/html" id="tpl_is_must">
+        <input type="checkbox" name="is_must" value="{{d.id}}" data-true="1" data-false="2" data-tb="sys_app_version" lay-skin="switch" lay-text="是|否" lay-filter="setZdVal" {{ d.is_must == 1 ? 'checked' : '' }}>
+    </script>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.doVersion' value='1'>
+            <a lay-event="edit" data-href="{:url('doVersion')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delVersion' value='1'>
+            <a lay-event="del" data-href="{:url('delVersion')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.delVersion neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/sysset/version';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:89, align: 'cetner' },
+            {field: 'version', title: '版本号',width:99},
+            {field: 'type', title: '客户端',width:161, templet: '#tpl_type'},
+            {field: 'remark', title: '版本说明'},
+            {field: 'is_must', title: '强制更新',width:89, templet: '#tpl_is_must'},
+            {field: 'create_time', title: '发布时间',width:129},
+            {fixed: 'right', title: '操作管理',width:129, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+    </script>
+</block>

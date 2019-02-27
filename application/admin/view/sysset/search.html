@@ -1,0 +1,61 @@
+<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">搜索管理</li>
+                    <eq name='_right.delSearch' value='1'>
+                        <button data-href="{:url('delSearch')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.keyword" data-type="like" autocomplete="off" placeholder="关键词...">
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--热门显示-->
+    <script type="text/html" id="tpl_status">
+        <input type="checkbox" name="status" value="{{d.id}}" data-true="1" data-false="2" data-tb="sys_search" lay-skin="switch" lay-text="是|否" lay-filter="setZdVal" {{ d.status == 1 ? 'checked' : '' }}>
+    </script>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.delSearch' value='1'>
+            <a lay-event="del" data-href="{:url('delSearch')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.delSearch neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/sysset/search';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:89, align: 'cetner' },
+            {field: 'keyword', title: '搜索内容'},
+            {field: 'count', title: '次数',width:89},
+            {field: 'status', title: '热门显示',width:89, templet: '#tpl_status'},
+            {fixed: 'right', title: '操作管理',width:89, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+    </script>
+</block>

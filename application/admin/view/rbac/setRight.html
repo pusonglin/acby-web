@@ -1,0 +1,46 @@
+﻿<extend name="public/base" />
+<block name="css">
+    <css href="__COMMON__/tree/access/tree.css" />
+</block>
+<block name="js">
+    <js href="__COMMON__/tree/access/tree.js" />
+    <js href="__JS__/rbac-setRight.js" />
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">配置权限</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-md12">
+                                    <div class="layui-card fl" style="width: 100%;">
+                                        <div class="layui-card-header" style="width: calc(100% - 15px);text-align: left;padding-left: 15px;">正在为『{$Think.get.name}』配置权限！</div>
+                                        <div class="layui-card-body">
+                                            <eq name="str" value="nodata">
+                                                暂无权限！
+                                                <else/>
+                                                {$str|raw}
+                                            </eq>
+                                        </div>
+                                        <div class="layui-form-item box-bottom">
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn layui-btn-normal" id="doSubmit" data-page="{$Think.get.p}" data-id="{$Think.get.id}" data-name="{$Think.get.name}" data-fresh="{$fresh}">立即提交</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

@@ -1,0 +1,529 @@
+html {
+    font-size: 62.5%;
+}
+
+/*html, body {background: #fff; font-family:"Helvetica Neue", Helvetica, STHeiTi, sans-serif; color:#666; background:#edeeef}*/
+html, body {
+    font-family: "PingHei", STHeitiSC-Light, "Lucida Grande", "Lucida Sans Unicode", "Helvetica,Arial,Verdana", "sans-serif", "Microsoft Yahei";
+    color: #666;
+    background: #F2F7F9;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset, img {
+    border: 0;
+}
+
+address, caption, cite, code, dfn, em, th, var {
+    font-style: normal;
+    font-weight: 500;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+caption, th {
+    text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    color: #000;
+    font-weight: 500;
+}
+
+abbr, acronym {
+    border: 0;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+input, select, textarea {
+    font-size: 100%;
+    font-family: "Microsoft Yahei";
+}
+
+textarea {
+    resize: none;
+}
+
+q:before, q:after {
+    content: "";
+}
+
+ins, a {
+    color: #333;
+    text-decoration: none;
+}
+
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a:after {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a, div, input {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+img, image {
+    width: 100%;
+    height: 100%;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.click-btn {
+    cursor: pointer;
+}
+
+.over {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+body {
+    max-width: 640px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+/*.swiper-slide{height: 100%!important;}*/
+body {
+    max-width: 640px;
+    min-width: 320px;
+    margin: 0 auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.count {
+    margin: auto 20px;
+}
+
+.count .orderTime {
+    background: #fff;
+    border-radius: 5px;
+    margin: 5px auto auto auto;
+}
+
+.count .orderTime .orderTop {
+    padding: 14px;
+    border-bottom: 1px solid #ececec;
+}
+
+.count .orderTime .orderTop > p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.count .orderTime .orderTop > p img {
+    width: 18px;
+    height: 18px;
+}
+
+.count .orderTime .orderTop > p span {
+    font-size: 1.4rem;
+    color: #3080F0;
+    line-height: 20px;
+    margin: 0 0 0 5px;
+}
+
+.count .orderTime .orderTop .orderMes {
+    margin: 20px auto auto auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.count .orderTime .orderTop .orderMes .orderMesL {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.count .orderTime .orderTop .orderMes .orderMesL span {
+    font-size: 1.5rem;
+    color: #404040;
+}
+
+.count .orderTime .orderTop .orderMes .orderMesL .sex {
+    width: 11px;
+    height: 11px;
+    margin: 0 5px 0 10px;
+}
+
+.count .orderTime .orderTop .orderMes .orderMesL em {
+    font-size: 1.3rem;
+    color: #919191;
+}
+
+.count .orderTime .orderTop .orderMes .orderMesL .ji {
+    width: 16px;
+    height: 16px;
+    margin: 0 0 0 10px;
+}
+
+.count .orderTime .orderTop .orderMes .orderMesR {
+    font-size: 1.4rem;
+    color: #919191;
+}
+
+.count .orderTime .orderBot {
+    padding: 8px 23px;
+}
+
+.count .orderTime .orderBot p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.count .orderTime .orderBot p img {
+    width: 14px;
+    height: 16px;
+    margin: 0 5px 0 0;
+}
+
+.count .orderTime .orderBot p span {
+    font-size: 1.4rem;
+    color: #919191;
+}
+
+.count .orderName {
+    padding: 15px 15px 0 15px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    margin: 10px auto auto auto;
+    overflow: hidden;
+}
+
+.count .orderName ul li {
+    margin: auto auto 15px auto;
+}
+
+.count .orderName ul li .pos {
+    position: relative;
+}
+
+.count .orderName ul li .pos span {
+    position: absolute;
+    font-size: 1.4rem;
+    color: #393939;
+    width: 100px;
+    line-height: 20px;
+}
+
+.count .orderName ul li .pos > div {
+    font-size: 1.4rem;
+    color: #919191;
+    min-height: 20px;
+    line-height: 20px;
+    margin: 0 0 0 110px;
+    text-align: right;
+}
+
+.count .timeCou {
+    margin: 10px auto auto auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.count .timeCou ul li .timePos {
+    position: relative;
+}
+
+.count .timeCou ul li .timePos.timeActive .timeFl p {
+    color: #656565 !important;
+}
+
+.count .timeCou ul li .timePos.timeActive .timeFl span {
+    color: #656565 !important;
+}
+
+.count .timeCou ul li .timePos.timeActive .radius {
+    box-shadow: 0 4px 10px #40A9FF !important;
+}
+
+.count .timeCou ul li .timePos .timeFl {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 90px;
+    text-align: center;
+    color: #C3C3C3;
+}
+
+.count .timeCou ul li .timePos .timeFl p {
+    font-size: 1.2rem;
+    line-height: 15px;
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+}
+
+.count .timeCou ul li .timePos .timeFl span {
+    display: inline-block;
+    transform: scale(0.85) translateY(-1px);
+    -webkit-transform: scale(0.85) translateY(-1px);
+}
+
+.count .timeCou ul li .timePos .timeFr {
+    margin: 0 0 0 90px;
+    border-left: 1px solid #e3e3e3;
+    padding: 0 0 15px 0;
+    position: relative;
+}
+
+.count .timeCou ul li .timePos .timeFr p {
+    margin: 0 0 0 15px;
+    font-size: 1.4rem;
+    color: #919191;
+    line-height: 20px;
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+}
+
+.count .timeCou ul li .timePos .timeFr .radius {
+    position: absolute;
+    top: 0;
+    left: -5px;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border: 1px solid #40A9FF;
+    border-radius: 50%;
+}
+
+.deviceBg {
+    background: #FFFFFF;
+    margin: 50px auto auto auto;
+    padding: 50px 0 0 0;
+    border-radius: 5px;
+    position: relative;
+}
+
+.deviceBg .device {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+}
+
+.deviceBg .device img {
+    width: 100px;
+    height: 100px;
+}
+
+.deviceBg > p {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.deviceBg > p img {
+    width: 18px;
+    height: 18px;
+}
+
+.deviceBg > p span {
+    color: #3080F0;
+    font-size: 1.4rem;
+    line-height: 20px;
+    margin: 0 0 0 8px;
+}
+
+.deviceBg .deviceMess {
+    margin: 5px 0 0 0;
+}
+
+.deviceBg .deviceMess ul li {
+    padding: 15px;
+    border-bottom: 1px solid #ececec;
+}
+
+.deviceBg .deviceMess ul li:last-child {
+    border-bottom: none;
+}
+
+.deviceBg .deviceMess ul li .devicePos {
+    position: relative;
+}
+
+.deviceBg .deviceMess ul li .devicePos span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 120px;
+    line-height: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #404040;
+}
+
+.deviceBg .deviceMess ul li .devicePos > div {
+    word-break: break-all;
+    color: #919191;
+    font-size: 1.4rem;
+    line-height: 20px;
+    margin: 0 0 0 130px;
+    text-align: right;
+}
+
+.deviceBg .deviceMess ul li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deviceBg .deviceMess ul li a span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #404040;
+}
+
+.deviceBg .deviceMess ul li a i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #b5b5b5;
+    border-right: 1px solid #b5b5b5;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.historyCount {
+    padding: 30px 0;
+}
+
+.historyCount .historyList {
+    margin: 0 0 10px 30px;
+    position: relative;
+    padding: 18px 0 50px 45px;
+}
+
+.historyCount .historyList:after {
+    position: absolute;
+    left: -2.5px;
+    width: 5px;
+    bottom: 0;
+    border-radius: 10px;
+    height: -webkit-calc(100% - 55px);
+    height: -moz-calc(100% - 55px);
+    height: calc(100% - 55px);
+    background: #3d9bf4;
+    content: '';
+}
+
+.historyCount .historyList .historyTime {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.historyCount .historyList .historyTime span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #C5C6C6;
+    margin: 0 10px 0 0;
+}
+
+.historyCount .historyList .historyTime span i {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin: 0 5px 0 0;
+    border-radius: 50%;
+}
+
+.historyCount .historyList .historyTime span i.iorange {
+    background: #FDBA28;
+}
+
+.historyCount .historyList .historyTime span i.igreen {
+    background: #51FD28;
+}
+
+.historyCount .historyList > p {
+    color: #1E1E1E;
+    font-size: 1.4rem;
+    line-height: 22px;
+}
+
+.historyCount .historyList .historyPos {
+    position: absolute;
+    top: 0;
+    left: -25px;
+}
+
+.historyCount .historyList .historyPos .timepos {
+    position: relative;
+}
+
+.historyCount .historyList .historyPos .timepos span {
+    display: inline-block;
+    position: relative;
+    font-size: 1.4rem;
+    text-align: center;
+    border-radius: 31.5px;
+    background-image: linear-gradient(50deg, #096DD9 0%, #84C4FF 100%);
+    width: 40px;
+    padding: 2px 5px;
+    color: #FFFFFF;
+    z-index: 999;
+}
+
+.historyCount .historyList .historyPos .timepos img {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    z-index: 1;
+    bottom: -12px;
+    left: 50%;
+    margin: 0 0 0 -6px;
+}
+
+.historyCount .historyList .historyPos .pos_radius {
+    background: #3d9bf4;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin: 15px auto;
+}
+
+.historyCount .historyList .historyPos .pos_radius.active {
+    background-image: linear-gradient(0deg, #096DD9 0%, #84C4FF 100%);
+    box-shadow: inset 0 1px 3px 0 #0030DA;
+}
+
+/*# sourceMappingURL=base.css.map */

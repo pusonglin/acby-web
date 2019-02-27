@@ -1,0 +1,120 @@
+<extend name="/public/base" />
+<block name="css">
+    <style type="text/css">
+        ::-webkit-scrollbar {width: 6px;  height: 6px;  background-color: #F5F5F5;   }
+        html{overflow: scroll;height: auto;}
+        body{background: #fafafa;overflow: auto;height: auto;}/*heigt:atuo是为了兼容360浏览器scrollTop*/
+        /*body{background: #fafafa;overflow: auto;}*/
+        .body-box{background: #fafafa;overflow: auto; min-width: 1200px!important;max-width: 1200px!important;}
+        #height-line{width: 100%;height: 75px;background: #fafafa;}
+        header{position: fixed;top:0;left: 0;z-index: 99999;;
+            transition: linear 0.8s;
+            -webkit-transition: linear 0.8s;
+            transform: translateY(0);
+            -webkit-transform: translateY(0);}
+        header.active{
+            transition: linear 1.5s;
+            -webkit-transition: linear 1.5s;
+            transform: translateY(-200px);
+            -webkit-transform: translateY(-200px);
+        }
+    </style>
+</block>
+<block name="js">
+    <js href="__COMMON__/js/jquery.cookie.js" />
+    <js href="__JS__/index-index.js" />
+</block>
+
+<block name="header">
+    <!--header-->
+    <header>
+        <div class="header-box">
+            <div class="header-logo fl">
+                <img src="__IMG__/logo.png">
+                <span class="headerH"></span>
+                <span class="headerH_16">乡村振兴</span>
+            </div>
+            <ul class="header-nav fl">
+                <volist name="list" id="v">
+                    <li>
+                        <a href="javascript:;" data-id="{$v.id}" data-fresh_id="{$v.fresh_id}">{$v.name}</a>
+                    </li>
+                </volist>
+            </ul>
+            <div class="header-logout fr">
+                 <ul>
+                     <!--消息通知-->
+                     <!--<li>
+                         <a href="javascript:;">
+                             <i class="fa fa-bell-o"></i>
+                             <span></span>
+                         </a>
+                     </li>-->
+
+                     <li>
+                        <div class="headerDiv">
+                            <div class="headerTx">
+                                <img src="{$user.headimg}"/>
+                            </div>
+                            <div class="headerArrow"><i class="fa fa-caret-down"></i></div>
+                            <!--<span>New</span>-->
+                        </div>
+                        <!--鼠标以上显示下拉菜单-->
+                         <div class="selectMean">
+                             <div class="selectarrow"></div>
+                             <div class="selectarrow2"></div>
+                              <div  class="personName">
+                                  {$user.username}<span>{$user.phone}</span>
+                              </div>
+
+                              <ul>
+                                  <li>
+                                      <a class="click-jump-btn" data-topnav-id="1" data-fresh-id="19"><i class="fa fa-user-o"></i>个人资料</a>
+                                      <a class="click-jump-btn" data-topnav-id="1" data-fresh-id="20"><i class="fa fa-key"></i>修改密码</a>
+                                      <a href="{$Think.ADMIN_URL}/user/logout.html"><i class="fa fa-sign-out"></i>退出</a>
+                                  </li>
+                             </ul>
+                         </div><!--/selectMean-->
+                     </li>
+                 </ul>
+            </div>
+        </div>
+    </header>
+    <!--概览-->
+    <div id="overview" style="display: none;"></div>
+</block>
+
+<block name="body">
+    <div id="height-line"></div>
+    <empty name="list">
+        <div style="padding: 50px 0; height: 600px; text-align: center;">
+            <h1>
+                <i class="layui-icon" style="line-height: 500px; font-size: 500px; color: #393D50;">&#xe61c;</i>
+            </h1>
+            <p style="font-size: 20px; font-weight: 300; color: #999;text-align: center;">o(╯□╰)o  您还没有权限哦，请联系管理员~</p>
+        </div>
+        <else/>
+        <!--aside nav-->
+        <aside class="lt_aside_nav content light fl" style="background: #fff">
+            <div class="nav_box">
+                <ul class="nav_ul"></ul>
+            </div>
+            <a href="" target="iframe" style="display: none;" id="hide-click-a"></a>
+        </aside>
+        <iframe id="iframe" name="iframe" frameborder="0" scrolling="no" width="100%" onload="reinitIframe();"></iframe>
+    </empty>
+</block>
+<block name="footer">
+    <div class="footer">
+        <ul >
+            <li><a href="javascript:;" target="_blank">关于我们</a></li>
+            <li><a href="javascript:;" target="_blank">服务协议</a></li>
+            <li><a href="javascript:;" target="_blank">运营中心</a></li>
+            <li><a href="javascript:;" target="_blank">客服中心</a></li>
+            <li><a href="javascript:;" target="_blank">联系邮箱</a></li>
+            <li><a href="javascript:;" target="_blank">侵权投诉</a></li>
+        </ul>
+        <p>Copyright © 2014-{:date('Y')} Songlinyun. All Rights Reserved.</p>
+    </div>
+</block>
+

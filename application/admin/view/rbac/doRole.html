@@ -1,0 +1,55 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>角色名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="name"  lay-verify="required" placeholder="请填写角色名称" autocomplete="off" class="layui-input" value="{$cur.name}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>超级管理</label>
+                                    <div class="layui-input-inline">
+                                        <input type="radio" name="is_super" value="1" title="是" <neq name="cur.is_super" value="2"> checked="checked"</neq> />
+                                        <input type="radio" name="is_super" value="2" title="否" <eq name="cur.is_super" value="2"> checked="checked"</eq> />
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">新增模块时，自动为超级管理添加权限！</div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>角色状态</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="status" value="1" title="启用" <neq name="cur.status" value="2"> checked="checked"</neq> />
+                                        <input type="radio" name="status" value="2" title="停用" <eq name="cur.status" value="2"> checked="checked"</eq> />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">角色描述</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="remark" class="layui-textarea">{$cur.remark}</textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneRole')}" data-back="{:url('role')}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

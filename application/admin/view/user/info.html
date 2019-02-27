@@ -1,0 +1,106 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">个人资料</li>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <fieldset class="layui-elem-field">
+                                <legend>基本信息</legend>
+                                <div class="layui-field-box">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">账号</label>
+                                        <div class="layui-form-mid layui-word-aux">{$cur.username}</div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">账号角色</label>
+                                        <div class="layui-form-mid layui-word-aux">{$cur.role_name}</div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">注册时间</label>
+                                        <div class="layui-form-mid layui-word-aux">{$cur.create_time}</div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">最近登录</label>
+                                        <div class="layui-form-mid layui-word-aux">{$cur.login_time}</div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">登录IP</label>
+                                        <div class="layui-form-mid layui-word-aux">{$cur.login_ip}</div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="layui-elem-field">
+                                <legend>修改资料</legend>
+                                <div class="layui-field-box">
+                                    <form class="layui-form" action="">
+                                        <div class="layui-form-item" id="headimg">
+                                            <label class="layui-form-label" style="padding-top: 60px;">头像</label>
+                                            <div class="layui-inline layer_open_iframe" data-href="{:url('/plugin/cropper')}?w=200&h=200&ele=headimg&old={$cur['headimg']}" data-w="800" data-h="680" data-title="头像上传" data-close="1" style="cursor: pointer;">
+                                                <img src="{$cur.headimg}" class="layui-circle" width="100" height="100">
+                                                <div style="width: 100px;text-align: center;padding: 5px 0;">点击上传</div>
+                                                <input type="hidden" name="headimg" value="{$cur.headimg}" />
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">性别</label>
+                                            <div class="layui-input-block">
+                                                <input type="radio" name="sex" value="1" title="男" <neq name="cur.sex" value="2"> checked="checked"</neq> />
+                                                <input type="radio" name="sex" value="2" title="女" <eq name="cur.sex" value="2"> checked="checked"</eq> />
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">姓名</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="realname" autocomplete="off" class="layui-input" value="{$cur.realname}" />
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">电话</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="phone" autocomplete="off" class="layui-input" value="{$cur.phone}" />
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">邮箱</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="email" autocomplete="off" class="layui-input" value="{$cur.email}" />
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item layui-form-text">
+                                            <label class="layui-form-label">备注</label>
+                                            <div class="layui-input-block">
+                                                <textarea name="remark" class="layui-textarea">{$cur.remark}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item box-bottom">
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('updateInfo')}" data-open="self">立即提交</button>
+                                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="jsdiv">
+    <script type="text/javascript">
+        //右上角信息同步
+        function sysnc() {
+            top.$('.headerTx').children('img').attr('src',$('input[name=headimg]').val());
+            top.$('.personName').html($('input[name=realname]').val()+'<span>'+$('input[name=phone]').val()+'</span>');
+        }
+    </script>
+</block>

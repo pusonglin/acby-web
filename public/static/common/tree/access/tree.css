@@ -1,0 +1,103 @@
+﻿.tree {
+    width: 95%;
+    min-height:20px;
+    padding:20px;
+    float: left;
+    margin-bottom: 40px;
+    position: relative;;
+}
+.tree ul{margin-left: 30px;position: relative;}
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative;
+    cursor: pointer;
+}
+
+.tree li::before, .tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.tree li::before {
+    border-left:1px solid #999;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.tree li::after {
+    border-top:1px solid #999;
+    height:20px;
+    top:25px;
+    width:25px
+}
+
+.tree li span {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid #999;
+    border-radius:5px;
+    display:inline-block;
+    padding:5px 8px;
+    text-decoration:none;
+    background: #f6f6f6;
+    vertical-align: middle;;
+}
+.tree li span i{
+    float: left;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 15px;
+    display: inline-block;
+    margin-left: -10px;
+    padding-left: 6px;
+}
+
+.tree li span a{
+    margin-left: 8px;
+    height:20px;line-height: 20px;
+    float: left;
+    color:#2b2b2b;
+}
+.tree li > ul >li{display: none;}
+.tree li.parent_li>span {
+    cursor:pointer
+}
+.tree>ul>li::before, .tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:25px
+}
+.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
+    background-color:rgba(255,255,255,0.3);
+    border:1px solid #94a0b4;
+    color:#000
+}
+.tree label{
+    float: left;
+    height: 20px;
+    line-height: 20px;
+}
+.tree label .right{float: left;margin-top: 4px;}
+.tree .right{
+    float: left;
+    margin: 0px 5px;
+}
+.tree-right{
+    border-bottom: none;
+    padding-bottom: 90px;
+    -webkit-border-radius:4px 4px 0px 0px;
+    -moz-border-radius:4px 4px 0px 0px;
+    border-radius:4px 4px 0px 0px;
+    margin-bottom: 0px;
+}
+.right-bottom{position: relative;float: left;padding:10px 0px !important;margin: 0px !important;display: block;}
+.right-bottom-fixed{position: fixed !important;text-align:center;left: 0px;bottom: 0px;background: rgba(41,42,44,0.2);margin-bottom: 0px;border-radius: 5px 5px 0 0;}
+.tree input[name=sort]{float: left;height: 14px !important;line-height: 14px !important;min-height:inherit !important;margin-left: 5px;font-size: 12px;margin-top: 0px;width: 25px;}
+.check_list{margin: 2px 4px !important;float: left;}

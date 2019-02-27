@@ -1,0 +1,372 @@
+<extend name="public/base"/>
+<block name='title'>{$cur.title}</block>
+<block name="css">
+    <style>
+        .countlist{
+            max-width: 760px;
+        }
+        .countlist>img,.countlist>image{
+            margin: 0 auto!important;
+            width: 100% !important;
+        }
+
+    </style>
+</block>
+<block name="body">
+    <!--喜欢  收藏   评论  微信  微博 左侧 显示-->
+    <div class="collectFixed">
+        <div class="enjoy enjoy_click styleBorder">
+            <p>1</p>
+            <div>
+                <i class=" fa fa-thumbs-o-up"></i>
+            </div>
+            <p>喜欢</p>
+        </div>
+
+        <div class="enshrine">
+            <div class="enshrinelist gatherClick">
+                <div class="enshStyle">
+                    <i class=" fa fa-star-o"></i>
+                </div>
+                <p>收藏</p>
+            </div>
+
+            <div class="enshrinelist ">
+                <div class="enshStyle">
+                    <i class="fa fa-commenting"></i>
+                </div>
+                <p>评论</p>
+            </div>
+
+
+            <div class="enshrinelist ">
+                <div class="enshStyle enshShow">
+                    <i  class="fa fa-weixin"></i>
+                </div>
+                <p>微信</p>
+
+                <!--微信码-->
+                <div class="wxMa">
+                    <div>
+                        <img src="images/wx.jpg" alt="">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="enshrinelist ">
+                <div class="enshStyle">
+                    <i class="fa fa-weibo"></i>
+                </div>
+                <p>微博</p>
+            </div>
+        </div><!--/enshrine-->
+    </div><!--/collectFixed-->
+
+    <div class="countlist">
+        <h1>{$cur.title}</h1>
+        <div class="list_x">
+            <p>作者：{$cur.source}</p>
+            <p>
+                <span>阅读数：{$cur.pv}</span>
+                <span>{$cur.create_time}</span>
+                <span>话题： <volist name="cur.type" id="v"><a href="#">{$v.name}</a></volist></span>
+            </p>
+        </div>
+        <p>
+            {$cur.content | raw }
+        </p>
+        <div class="tagList">
+            <volist name="cur.type" id="v"><a href="{:url('News/typeList')}?flag={$v.id}&title={$v.name}" style="margin-right: 10px">{$v.name}</a></volist>
+        </div>
+
+        <!--喜欢  收藏   评论  微信  微博 底部 显示-->
+        <div class="enjoyBot">
+            <div class="enjoyBot_dz enjoy_click">
+                <div>
+                    <i class=" fa fa-thumbs-o-up"></i>
+                </div>
+                <p>1人喜欢</p>
+            </div>
+
+            <div class="enshrineBot">
+                <div class="enshrineBotlist  gatherClick">
+                    <div class="enshrineS"><i class=" fa fa-star-o"></i></div>
+                    <p>收藏</p>
+                </div>
+
+                <div class="enshrineBotlist ">
+                    <div class="enshrineS">  <i class=" fa fa-commenting"></i></div>
+                    <p>评论</p>
+                </div>
+
+                <div class=" enshrineBotlist enshrineS_hover">
+                    <div class="enshrineS">  <i class=" fa fa-weixin"></i></div>
+                    <p>微信</p>
+
+                    <!--微信码-->
+                    <div class="wxMa">
+                        <div class="enshrineS">
+                            <img src="__IMG__/wx.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" enshrineBotlist ">
+                    <div class="enshrineS">  <i class=" fa fa-weibo"></i></div>
+                    <p>微博</p>
+                </div>
+            </div>
+        </div><!--/enjoyBot-->
+
+
+        <!--评论-->
+
+        <div class="discuss">
+            <div class="discussTx">
+                <img src="__IMG__/downTx.png" alt="">
+            </div>
+
+            <div class="discussText">
+                <textarea placeholder="写下你的想法，一起交流"></textarea>
+                <div>
+                    <button>发布评论</button>
+                </div>
+            </div>
+        </div><!--/discuss-->
+
+        <!--最新评论-->
+        <div class="discussNews">
+            <h2>最新评论</h2>
+
+            <div class="discussList">
+                <div class="discussListAuto">
+                    <div class="discussListImg">
+                        <img src="__IMG__/downTx.png" alt="">
+                    </div>
+
+                    <div class="discussListFont">
+                        <div class="disname">
+                            <p><a href="#">小明小明小明</a><span>4小时前</span></p>
+
+                            <div>
+                                <label>
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <em>0</em>
+                                </label>
+                                <a href="JavaScript:;">回复</a>
+                            </div>
+                        </div>
+
+                        <div class="disSend">
+                            文字文字文字文字文字文字文字文字文字文字文字文字文字
+                        </div>
+
+                        <!--回复文字-->
+                        <div class="hf_font">
+                            <div>
+                                <div class="hf_img">
+                                    <img src="__IMG__/downTx.png" alt="">
+                                </div>
+
+                                <div class="hf_wen">
+                                    <a href="#">小花小花</a>
+                                    <div class="hf_title">
+                                        <p>我是回复</p>
+                                        <div>
+                                            <label>
+                                                <i class="fa fa-thumbs-o-up"></i>
+                                                <em>0</em>
+                                            </label>
+                                            <a href="JavaScript:;">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--/hf_font-->
+
+                        <div class="hf_font">
+                            <div>
+                                <div class="hf_img">
+                                    <img src="__IMG__/downTx.png" alt="">
+                                </div>
+
+                                <div class="hf_wen">
+                                    <a href="#">小花小花</a>
+                                    <div class="hf_title">
+                                        <p>我是回复</p>
+                                        <div>
+                                            <label>
+                                                <i class="fa fa-thumbs-o-up"></i>
+                                                <em>0</em>
+                                            </label>
+                                            <a href="JavaScript:;">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--/hf_font-->
+
+                        <!--回复框-->
+                        <div class="reply">
+                            <textarea placeholder="回复小明小明:"></textarea>
+                            <div>
+                                <a href="javascript:;">取消回复</a>
+                                <button>回复</button>
+                            </div>
+                        </div>
+
+                    </div><!--/discussListFont-->
+                </div>
+            </div><!--/discussList-->
+
+            <div class="discussList">
+                <div class="discussListAuto">
+                    <div class="discussListImg">
+                        <img src="__IMG__/downTx.png" alt="">
+                    </div>
+
+                    <div class="discussListFont">
+                        <div class="disname">
+                            <p><a href="#">小明小明小明</a><span>4小时前</span></p>
+
+                            <div>
+                                <label>
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <em>0</em>
+                                </label>
+                                <a href="JavaScript:;">回复</a>
+                            </div>
+                        </div>
+
+                        <div class="disSend">
+                            文字文字文字文字文字文字文字文字文字文字文字文字文字
+                        </div>
+
+                        <!--回复-->
+
+                        <div class="reply">
+                            <textarea placeholder="回复小明小明:"></textarea>
+                            <div>
+                                <a href="javascript:;">取消回复</a>
+                                <button>回复</button>
+                            </div>
+                        </div>
+
+                    </div><!--/discussListFont-->
+                </div>
+            </div><!--/discussList-->
+
+            <div class="discussList">
+                <div class="discussListAuto">
+                    <div class="discussListImg">
+                        <img src="__IMG__/downTx.png" alt="">
+                    </div>
+
+                    <div class="discussListFont">
+                        <div class="disname">
+                            <p><a href="#">小明小明小明</a><span>4小时前</span></p>
+
+                            <div>
+                                <label>
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <em>0</em>
+                                </label>
+                                <a href="JavaScript:;">回复</a>
+                            </div>
+                        </div>
+
+                        <div class="disSend">
+                            文字文字文字文字文字文字文字文字文字文字文字文字文字
+                        </div>
+
+                        <!--回复-->
+
+                        <div class="reply">
+                            <textarea placeholder="回复小明小明:"></textarea>
+                            <div>
+                                <a href="javascript:;">取消回复</a>
+                                <button>回复</button>
+                            </div>
+                        </div>
+
+                    </div><!--/discussListFont-->
+                </div>
+            </div><!--/discussList-->
+
+            <div class="discussList">
+                <div class="discussListAuto">
+                    <div class="discussListImg">
+                        <img src="__IMG__/downTx.png" alt="">
+                    </div>
+
+                    <div class="discussListFont">
+                        <div class="disname">
+                            <p><a href="#">小明小明小明</a><span>4小时前</span></p>
+
+                            <div>
+                                <label>
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <em>0</em>
+                                </label>
+                                <a href="JavaScript:;">回复</a>
+                            </div>
+                        </div>
+
+                        <div class="disSend">
+                            文字文字文字文字文字文字文字文字文字文字文字文字文字
+                        </div>
+
+                        <!--回复-->
+
+                        <div class="reply">
+                            <textarea placeholder="回复小明小明:"></textarea>
+                            <div>
+                                <a href="javascript:;">取消回复</a>
+                                <button>回复</button>
+                            </div>
+                        </div>
+
+                    </div><!--/discussListFont-->
+                </div>
+            </div><!--/discussList-->
+
+            <div class="discussList">
+                <div class="discussListAuto">
+                    <div class="discussListImg">
+                        <img src="__IMG__/downTx.png" alt="">
+                    </div>
+
+                    <div class="discussListFont">
+                        <div class="disname">
+                            <p><a href="#">小明小明小明</a><span>4小时前</span></p>
+
+                            <div>
+                                <label>
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <em>0</em>
+                                </label>
+                                <a href="JavaScript:;">回复</a>
+                            </div>
+                        </div>
+
+                        <div class="disSend">
+                            文字文字文字文字文字文字文字文字文字文字文字文字文字
+                        </div>
+
+                        <!--回复-->
+
+                        <div class="reply">
+                            <textarea placeholder="回复小明小明:"></textarea>
+                            <div>
+                                <a href="javascript:;">取消回复</a>
+                                <button>回复</button>
+                            </div>
+                        </div>
+
+                    </div><!--/discussListFont-->
+                </div>
+            </div><!--/discussList-->
+        </div><!--/discussNews-->
+    </div><!--/countlist-->
+</block>

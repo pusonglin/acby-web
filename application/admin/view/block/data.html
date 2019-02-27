@@ -1,0 +1,78 @@
+<extend name="public/base" />
+<block name="js">
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.config.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.all.min.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/lang/zh-cn/zh-cn.js" />
+    <js href="__JS__/block-data.js" />
+</block>
+<block name="css">
+    <style type="text/css">
+        #data .block_list{width: 100%;height: auto;float: left;background: #efefef;position: relative;margin: 0 0 10px 0;}
+        #data .blockul{width:calc(100% - 150px);height: auto;float: left;padding: 10px 0;}
+        #data .blockul>li{width:100%;position: relative;float:left;overflow: hidden;display:inline;margin: 0 !important;padding: 5px 0px;}
+        #data .block_btns{width: 150px;position:absolute;text-align: center;right: 0;top:25px;}
+        .layui-form-item{width: 100%;display: inline-block;}
+        .layui-form-label{width: 200px !important;float: left;}
+        .layui-input-block{width: calc(100% - 240px) !important;float: left;margin-left: 5px;}
+        .layui-input-block i{position: absolute;right: 0px;top:0px;height: 36px;line-height: 36px;}
+    </style>
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">更新数据<span style="float:right;color: #999;font-size: 12px;display: inline-block;max-width: 750px;height: 40px;line-height:40px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; ">
+                            &nbsp;&nbsp;|&nbsp;&nbsp;{$cur.page_title}&nbsp;&nbsp;〉&nbsp;{$cur.title}
+                        </span>
+                    </li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <ul id="data">
+                                    <volist name="cur.conditions" id="v" key="k">
+                                        <li class="block_list">
+                                            <ul class="blockul tab-item-content">
+                                                <volist name="v" id="val" key="kk">
+                                                    <li class="layui-form-item">
+                                                        <label class="layui-form-label"><b class="is_must">*</b>{$val.name}[{$key}.{$k -1}]</label>
+                                                        <div class="layui-input-block">
+                                                            <input type="text" name="{$key}[]" placeholder="请填写{$val.name}" autocomplete="off" class="layui-input" value="{$val.val}" />
+                                                            <eq name="val.isupload" value="1">
+                                                                <i class="data_upload" id="img-up{$k}-{$kk}" style="display: none;"></i>
+                                                                <i class='upbtn fa fa-upload layui-btn layui-btn-normal layui-btn-xs' onclick="upImage('img-up{$k}-{$kk}')">&nbsp;上传图片</i>
+                                                            </eq>
+                                                        </div>
+                                                    </li>
+                                                </volist>
+                                            </ul>
+                                            <div class="block_btns">
+                                                <a class="layui-btn layui-btn-primary layui-btn-xs prev_btn">上移↑</a>
+                                                <a class="layui-btn layui-btn-primary layui-btn-xs next_btn">下移↓</a>
+                                            </div>
+                                        </li>
+                                    </volist>
+                                </ul>
+
+                                <div class="layui-form-item box-bottom">
+                                    <label class="layui-form-label"></label>
+                                    <input type="hidden" name="block_id" value="{$cur.id}">
+                                    <input type="hidden" name="profiles" value="{$cur.profiles}">
+                                    <input type="hidden" name="count" value="{$cur.count}">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('data')}" data-back="{:url('block')}?page_id={$cur.page_id}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

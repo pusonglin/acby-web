@@ -1,0 +1,59 @@
+﻿<extend name="public/base" />
+<block name='js'>
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.config.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.all.min.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/lang/zh-cn/zh-cn.js" />
+    <js href="__JS__/ueditor.js" />
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>模板标识</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="code"  lay-verify="required" placeholder="请填写模板标识" autocomplete="off" class="layui-input" value="{$cur.code}" />
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">模板标识必须唯一！</div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>模板标题</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title"  lay-verify="required" placeholder="请填写模板标题" autocomplete="off" class="layui-input" value="{$cur.title}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label"><b class="is_must">*</b>模板详情</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="content" id="content" lay-verify="required" placeholder="请填写模板详情" class="layui-textarea layui-editor">{$cur.content}</textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneBlock')}" data-back="{:url('block')}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="footer">
+    <script type="text/javascript">
+        //实例化ueditor
+        UE.getEditor('content');
+    </script>
+</block>

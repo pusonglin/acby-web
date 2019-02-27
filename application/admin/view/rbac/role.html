@@ -1,0 +1,144 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">角色管理</li>
+                    <eq name="_right.delRole" value="1">
+                        <button data-href="{:url('delRole')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name="_right.doRole" value="1">
+                        <button data-href="{:url('doRole')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加角色</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.name" data-type="like" autocomplete="off" placeholder="角色名称...">
+                            </div>
+                            <div class="layui-inline">
+                                <select class="reload-search" data-name="a.status" data-type="eq" placeholder="全部">
+                                    <option value="">全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="2">停用</option>
+                                </select>
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--状态-->
+    <script type="text/html" id="tpl_status">
+        <input type="checkbox" name="status" value="{{d.id}}" data-true="1" data-false="2" data-tb="role" lay-skin="switch" lay-text="是|否" lay-filter="setZdVal" {{ d.status == 1 ? 'checked' : '' }}>
+    </script>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.setRight' value='1'>
+            <a lay-event="detail" data-href="{:url('setRight')}?id={{d.id}}&name={{d.name}}" class="layui-btn layui-btn-primary layui-btn-xs">配置</a>
+        </eq>
+        <eq name='_right.doRole' value='1'>
+            <a lay-event="edit" data-href="{:url('doRole')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delRole' value='1'>
+            <a lay-event="del" data-href="{:url('delRole')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.setRight neq 1 AND $_right.doRole neq 1 AND $_right.delRole neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/rbac/role';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:79},
+            {field: 'name', title: '角色名称'},
+            {field: 'remark', title: '角色描述',width:357},
+            {field: 'status', title: '是否启用',width:79, templet: '#tpl_status', unresize: true},
+            {fixed: 'right', title: '操作管理',width:169, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+    </script>
+
+
+    <!--<section class="rt_wrap_head content">
+        <div class="rt_content">
+            <div class="page_title">
+                <h2 class="fl">权限管理 > 角色管理</h2>
+                <a href="javascript:;" data-url="{:url('delRole')}" class="fr top_rt_btn del_icon btn-delBatch <neq name='_right.delRole' value='1'>btn-disable</neq>">批量删除</a>
+                <a data-href="{:url('doRole')}" class="fr layer_open_iframe top_rt_btn add_icon margin-right-10 <neq name='_right.doRole' value='1'>btn-disable</neq>">添加角色</a>
+            </div>
+            <table class="table list-table">
+                <notempty  name="list">
+                    <tr>
+                        <th class="bfb5">
+                            <label>
+                                <input type="checkbox" id='checkAll' title="全选">
+                                <span class="check_all"></span>
+                            </label>
+                        </th>
+                        <th class="bfb5">序号</th>
+                        <th class="bfb15">角色名称</th>
+                        <th class="bfb45">角色描述</th>
+                        <th class="bfb10">角色状态</th>
+                        <th class="bfb20">操作管理</th>
+                    </tr>
+                    <else/>
+                    <tr><th class="center bfb100">没有数据！</th></tr>
+                </notempty>
+            </table>
+        </div>
+    </section>
+
+    <notempty  name="list">
+        <section class="rt_wrap content">
+            <div class="rt_content">
+                <table class="table list-table">
+                    <volist name="list" id="v">
+                        <tr class="del-remove-{$v.id}">
+                            <td class="center bfb5">
+                                <label>
+                                    <input type="checkbox" value="{$v.id}" class="checkIds">
+                                    <span class="check_list"></span>
+                                </label>
+                            </td>
+                            <td class="center bfb5">{$i}</td>
+                            <td class="center bfb15">{$v.name}</td>
+                            <td class="center bfb45 ellipsis">{$v.remark}</td>
+                            <td class="center bfb10 set_zd_val" data-id="{$v.id}" data-ask1="确定要设为关闭？" data-ask2="确定要设为开启？" data-title1="开启" data-title2="关闭" data-tb="role" data-zdName="status">
+                                <eq name="v.status" value="1">
+                                    <a title="开启" class="link_icon set_val_btn" data-val="1">&#89;</a>
+                                    <else/>
+                                    <a title="关闭" class="link_icon set_val_btn" data-val="2">&#88;</a>
+                                </eq>
+                            </td>
+                            <td class="center bfb20">
+                                <a title="编辑" data-href="{:url('doRole?id='.$v['id'].'&p='.$p)}" class="layer_open_iframe margin-right-10 <neq name='_right.doRole' value='1'>btn-disable</neq>">编辑</a>
+                                <a title="配置权限" data-href="{$Think.ADMIN_URL}/rbac/setRight?id={$v.id}&p={$p}&name={$v.name}" class="layer_open_iframe margin-right-10 <neq name='_right.setRight' value='1'>btn-disable</neq>">配置权限</a>
+                                <a title="删除" href="javascript:void(0)" data-url="{:url('delRole')}" data-id="{$v.id}" class="btn-del <neq name='_right.delRole' value='1'>btn-disable</neq>">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+                <aside class="paging">
+                    {$page}
+                </aside>
+            </div>
+        </section>
+    </notempty>-->
+</block>

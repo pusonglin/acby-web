@@ -1,0 +1,92 @@
+﻿<extend name="public/base" />
+<block name='js'>
+    <style type="text/css">
+        .body-box{overflow: visible;}
+    </style>
+    <js href="__JS__/auth-doRight.js" />
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>节点URL</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="url"  lay-verify="required" placeholder="请填写节点URL" autocomplete="off" class="layui-input" value="{$cur.url}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>节点名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="name"  lay-verify="required" placeholder="请填写节点名称" autocomplete="off" class="layui-input" value="{$cur.name}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>节点类型</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="type" value="1" title="系统" lay-filter="type" <eq name="cur.type" value="1"> checked="checked"</eq> />
+                                        <input type="radio" name="type" value="2" title="模块" lay-filter="type" <eq name="cur.type" value="2"> checked="checked"</eq> />
+                                        <input type="radio" name="type" value="3" title="功能" lay-filter="type" <eq name="cur.type" value="3"> checked="checked"</eq> />
+                                        <input type="radio" name="type" value="4" title="功能点" lay-filter="type" <eq name="cur.type" value="4"> checked="checked"</eq> />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>所属节点</label>
+                                    <div class="layui-input-inline">
+                                        <select id="pid" name="pid" lay-verify="required" placeholder="请选择所属节点">
+                                            <option value="">请选择所属节点</option>
+                                            <option data-type="0" value="0" disabled <eq name="cur.pid" value="0"> selected</eq>>作为新系统</option>
+                                            <volist name="lists" id="v">
+                                                <option data-type="{$v.type}" value="{$v.id}" <neq name="v.type" value="$cur['type'] - 1">disabled</neq> <eq name="cur.pid" value="$v.id"> selected="selected" </eq> >{$v.name}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>作为导航</label>
+                                    <div class="layui-input-inline">
+                                        <input type="radio" name="isnav" value="1" title="是" <neq name="cur.isnav" value="2"> checked="checked"</neq>  <notin name="cur.type" value="2,3"> disabled</notin>/>
+                                        <input type="radio" name="isnav" value="2" title="否" <eq name="cur.isnav" value="2"> checked="checked"</eq>  <notin name="cur.type" value="2,3"> disabled</notin>/>
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">作为导航将在左侧导航菜单列表显示！『仅类型为模块和功能有效』</div>
+                                </div>
+                                <eq name="cur.type" value="2">
+                                    <div class="layui-form-item icon">
+                                        <label class="layui-form-label"><b class="is_must">*</b>节点图标</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="icon" lay-verify="required" placeholder="请填写节点图标" autocomplete="off" class="layui-input" value="{$cur.icon}">
+                                        </div>
+                                        <div class="layui-form-mid layui-word-aux">例如：fa-user</div>
+                                    </div>
+                                    <else/>
+                                    <div class="layui-form-item icon" style="display: none;">
+                                        <label class="layui-form-label"><b class="is_must">*</b>节点图标</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="icon" placeholder="请填写节点图标" autocomplete="off" class="layui-input" value="{$cur.icon}">
+                                        </div>
+                                        <div class="layui-form-mid layui-word-aux">例如：fa-user</div>
+                                    </div>
+                                </eq>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneRight')}" data-back="{:url('right')}?_t='{:time()}#{$cur['id']}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

@@ -1,0 +1,72 @@
+<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">探索发现</li>
+                    <eq name="_right.delDiscovery" value="1">
+                        <button data-href="{:url('delDiscovery')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name="_right.doDiscovery" value="1">
+                        <button data-href="{:url('doDiscovery')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加发现</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.title" data-type="like" autocomplete="off" placeholder="主题...">
+                            </div>
+                            <div class="layui-inline">
+                                <select class="reload-search" data-name="a.status" data-type="eq" placeholder="全部状态">
+                                    <option value="">全部状态</option>
+                                    <option value="1">已发布</option>
+                                    <option value="2">未发布</option>
+                                </select>
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.doDiscovery' value='1'>
+            <a lay-event="edit" data-href="{:url('doDiscovery')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delDiscovery' value='1'>
+            <a lay-event="del" data-href="{:url('delDiscovery')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.doDiscovery neq 1 AND $_right.delDiscovery neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/discover/index';
+        var cols = [[ //表头
+            {type:'checkbox'},
+            {field: 'id', title: 'ID',width:49},
+            {field: 'title', title: '名称',width:89},
+            {field: 'url', title: '连接'},
+            {field: 'sort', title: '排序',width:49},
+            {field: 'create_time', title: '创建时间',width:119},
+            {field: 'create_uid', title: '创建人',width:69},
+            {fixed: 'right', title: '操作管理',width:119, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+    </script>
+</block>

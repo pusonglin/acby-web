@@ -1,0 +1,84 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap_head content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">权限节点</li>
+                    <eq name='_right.delRight' value='1'>
+                        <button data-href="{:url('delRight')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name='_right.doRight' value='1'>
+                        <button data-href="{:url('doRight')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加节点</button>
+                    </eq>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--状态-->
+    <script type="text/html" id="tpl_type">
+        {{# if(d.type==1){ }}
+        系统
+        {{# }else if(d.type==2){ }}
+        模块
+        {{# }else if(d.type==3){ }}
+        功能
+        {{# }else{ }}
+        功能点
+        {{# } }}
+    </script>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.doRight' value='1'>
+            <a lay-event="edit" id="{{d.id}}" data-href="{:url('doRight')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delRight' value='1'>
+            <a lay-event="del" data-href="{:url('delRight')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.doRight neq 1 AND $_right.delRight neq 1">
+            暂无权限
+        </if>
+    </script>
+
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/rbac/right';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:69},
+            {field: 'name', title: '节点名称'},
+            {field: 'url', title: '节点URL',width:299},
+            {field: 'type', title: '节点类型',width:108, templet: '#tpl_type'},
+            {fixed: 'right', title: '操作管理',width:119, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols,false);
+    </script>
+    <style type="text/css">
+        body{overflow: auto;}
+    </style>
+</block>
+<block name="footer">
+    <script type="text/javascript">
+        $(function () {
+            setTimeout(function () {
+                var  hash = location.hash; //锚点
+                if(hash){
+                    var scroll = $(hash).offset().top;
+                    var parntBody = window.parent.$('html,body');
+                    parntBody.animate({scrollTop:scroll},500);
+                }
+            },1000);
+        })
+    </script>
+</block>

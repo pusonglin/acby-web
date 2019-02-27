@@ -1,0 +1,53 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap_head content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">供需类型</li>
+                    <eq name='_right.delDemand' value='1'>
+                        <button data-href="{:url('delDemand')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name='_right.doDemand' value='1'>
+                        <button data-href="{:url('doDemand')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加类型</button>
+                    </eq>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.doDemand' value='1'>
+            <a lay-event="edit" data-href="{:url('doDemand')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delDemand' value='1'>
+            <a lay-event="del" data-href="{:url('delDemand')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.doDemand neq 1 AND $_right.delDemand neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/sysset/demand';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:69},
+            {field: 'name', title: '类型名称'},
+            {field: 'integral', title: '积分',width:150},
+            {field: 'credit_score', title: '信用分',width:150},
+            {fixed: 'right', title: '操作管理',width:199, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols,false);
+    </script>
+</block>

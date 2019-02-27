@@ -1,0 +1,133 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">用户管理</li>
+                    <eq name="_right.delUser" value="1">
+                        <button data-href="{:url('delUser')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name="_right.doUser" value="1">
+                        <button data-href="{:url('doUser')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加用户</button>
+                    </eq>
+                    <eq name='_right.import' value='1'>
+                        <button data-msg="import" data-title="批量导入"  data-fn="file" class="batch-btn batch-import layui-btn layui-btn-primary layui-btn-sm fr">批量导入</button>
+                    </eq>
+                    <eq name='_right.export' value='1'>
+                        <button data-msg="确定要导出选中的数据吗？" data-href="{:url('export')}" class="batch-btn layui-btn layui-btn-primary layui-btn-sm fr">批量导出</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.realname" data-type="like" autocomplete="off" placeholder="姓名...">
+                            </div>
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.phone" data-type="like" autocomplete="off" placeholder="手机号...">
+                            </div>
+                            <div class="layui-inline">
+                                <select class="reload-search" data-name="a.status" data-type="eq" placeholder="全部">
+                                    <option value="">全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="2">停用</option>
+                                </select>
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <eq name='_right.import' value='1'>
+        <section id="layer_import" style="display: none;">
+            <ul class="layui-timeline" style="padding: 20px;">
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis layui-icon-download-circle" style="font-size:20px;" onclick="layer_close_iframe(0,1)"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <div class="layui-timeline-title">第1步　下载人员信息模板，填写要导入的人员信息
+                            <a target="_blank" href="/uploads/template/memberImportTemplate.xlsx" download="人员信息导入模板.xlsx"><button class="layui-btn layui-btn-normal layui-btn-xs download-btn">下载模板</button></a>
+                        </div>
+                    </div>
+                </li>
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis layui-icon-upload" style="font-size:20px;"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <div class="layui-timeline-title">第2步　上传填写好的人员信息表
+                            <button class="layui-btn layui-btn-normal layui-btn-xs upload-btn batch-btn"  data-url="/rbac/import">上传文件</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </eq>
+
+    <!--状态-->
+    <script type="text/html" id="tpl_status">
+        {{# if(d.username=='lvguozhong'){ }}
+        <input type="checkbox" lay-skin="switch" disabled lay-text="是|否" {{ d.status == 1 ? 'checked' : '' }} >
+        {{# }else{ }}
+        <input type="checkbox" name="status" value="{{d.id}}" data-true="1" data-false="2" data-tb="admin" lay-skin="switch" lay-text="是|否" lay-filter="setZdVal" {{ d.status == 1 ? 'checked' : '' }}>
+        {{# } }}
+    </script>
+
+    <!--状态-->
+    <script type="text/html" id="tpl_role_status">
+        {{# if(d.role_status){ }}
+            {{d.role_status}}
+        {{# }else{ }}
+            ——
+        {{# } }}
+    </script>
+
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        {{# if(d.username=='admin'){ }}
+            {{# if(d.username=='admin'){ }}
+                超级账户！
+            {{# }else{ }}
+                普通账户
+            {{# } }}
+        {{# }else{ }}
+        <eq name='_right.doUser' value='1'>
+            <a lay-event="edit" data-href="{:url('doUser')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delUser' value='1'>
+            <a lay-event="del" data-href="{:url('delUser')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.doUser neq 1 AND $_right.delUser neq 1">
+            暂无权限！
+        </if>
+        {{# } }}
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/rbac/user';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'username', title: '姓名',width:122},
+            {field: 'role_name', title: '角色',width:109},
+            {field: 'phone', title: '手机'},
+            {field: 'status', title: '是否启用',width:78, templet: '#tpl_status'},
+            {fixed: 'right', title: '操作管理',width:142, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+
+        //隐藏上传file
+        function hide_file() {
+            $('input[name=file]').attr('type','hidden');
+        }
+    </script>
+</block>

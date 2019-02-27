@@ -1,0 +1,66 @@
+﻿<extend name="public/base" />
+<block name="css">
+    <css href="__COMMON__/tree/access/tree.css" />
+</block>
+<block name="js">
+    <js href="__COMMON__/tree/access/tree.js" />
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">常规栏目</li>
+                    <eq name='_right.delCategory' value='1'>
+                        <button data-href="{:url('delCategory')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name='_right.doCategory' value='1'>
+                        <button data-href="{:url('doCategory')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加栏目</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-md12">
+                                    <div class="layui-card fl" style="width: 100%;">
+                                        <div class="layui-card-body">
+                                            <div class="tree" data-hidden="1">
+                                                {:show_category_list($list,$_right,$Think.ADMIN_URL."/Sysset/doCategory.html",$Think.ADMIN_URL."/Sysset/delCategory.html")}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="jsDiv">
+    <script type="text/javascript">
+        $(function () {
+            //跳转到指定锚点
+            var  hash = location.hash; //锚点
+            if(hash){
+                showHash(hash);
+                setTimeout(function () {
+                    $('.rt_wrap').mCustomScrollbar('scrollTo',hash);
+                },500);
+            }
+        });
+
+        //展开当前编辑的栏目
+        function showHash(hash){
+            $(hash).children('span').children('i').click();
+            var pid = $(hash).attr('data-pid');
+            if(pid>0){
+                hash = '#'+pid;
+                showHash(hash);
+            }
+        }
+    </script>
+</block>

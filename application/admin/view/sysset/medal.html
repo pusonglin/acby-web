@@ -1,0 +1,86 @@
+<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">勋章管理</li>
+                    <eq name='_right.delMedal' value='1'>
+                        <button data-href="{:url('delMedal')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name='_right.doMedal' value='1'>
+                        <button data-href="{:url('doMedal')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加内容</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.name" data-type="like" autocomplete="off" placeholder="勋章名称...">
+                            </div>
+                            <div class="layui-inline">
+                                <select class="reload-search" data-name="a.status" data-type="eq" placeholder="全部状态">
+                                    <option value="">全部状态</option>
+                                    <option value="1">已启用</option>
+                                    <option value="2">未启用</option>
+                                </select>
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--是否启用-->
+    <script type="text/html" id="tpl_status">
+        <input type="checkbox" name="status" value="{{d.id}}" data-true="1" data-false="2" data-tb="sys_medal" lay-skin="switch" lay-text="是|否" lay-filter="setZdVal" {{ d.status == 1 ? 'checked' : '' }}>
+    </script>
+
+    <!--未获得icon-->
+    <script type="text/html" id="tpl_unable_icon">
+        <img src="{{d.unable_icon}}" width="20" height="20"/>
+    </script>
+
+    <!--已获得icon-->
+    <script type="text/html" id="tpl_able_icon">
+        <img src="{{d.able_icon}}" width="20" height="20"/>
+    </script>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.doMedal' value='1'>
+            <a lay-event="edit" data-href="{:url('doMedal')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delMedal' value='1'>
+            <a lay-event="del" data-href="{:url('delMedal')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.delMedal neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/sysset/medal';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:89, align: 'cetner' },
+            {field: 'name', title: '勋章名称'},
+            {field: 'status', title: '是否启用',width:118, templet: '#tpl_status'},
+            {field: 'task_num', title: '要求任务数',width:120},
+            {field: 'unable_icon', title: '勋章icon(未获得)',width:120, templet: '#tpl_unable_icon'},
+            {field: 'able_icon', title: '勋章icon(已获得)',width:120, templet: '#tpl_able_icon'},
+            {fixed: 'right', title: '操作管理',width:119, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+    </script>
+</block>

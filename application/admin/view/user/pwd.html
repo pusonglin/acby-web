@@ -1,0 +1,45 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">修改密码</li>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>原密码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" name="oldPwd" lay-verify="required" placeholder="请填写原密码" autocomplete="off" class="layui-input" >
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>新密码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" name="newPwd" lay-verify="required" placeholder="请填写新密码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>确认密码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" name="reNewPwd" lay-verify="required" placeholder="请再次填写新密码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit"  data-url="{:url('pwd')}" data-open="self">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

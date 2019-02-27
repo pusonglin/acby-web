@@ -1,0 +1,113 @@
+<extend name="public/base_no_header" />
+<block name='title'>修改密码</block>
+<block name="css">
+    <style>
+        body{
+            background: #fff;
+        }
+    </style>
+</block>
+<block name="body">
+    <div class="loginCont">
+        <div class="loginBg"></div>
+        <div class="loginCenter">
+            <div class="logoImg"> <img src="__IMG__/logo.png" alt=""></div>
+
+            <h3>设置密码</h3>
+            <div class="loginInfo">
+                <div class="form-row posTop">
+                    <div class="mobile-country">
+                        +86
+                    </div><!--/mobile-country-->
+
+                    <div class="loginInpt paddingleft">
+                        <input type="text" placeholder="请输入手机号" >
+                        <span class="input-error inputLeft">请输入手机号</span>
+                    </div><!--/loginInpt-->
+                </div><!--/form-row-->
+
+                <div class="form-row">
+                    <div class="loginInpt login_flex">
+                        <input type="text" placeholder="请输入验证码">
+                        <span class="input-error">请输入验证码</span>
+                    </div>
+
+                    <div class="input_yzm">
+                        获取验证码
+                    </div>
+                </div><!--/form-row-->
+            </div><!--/loginInfo-->
+
+            <div class="login_btn" onclick="location='pwdConfirm'">确定</div>
+
+        </div><!--/loginCenter-->
+    </div>
+
+
+    <!--选择地区电话号码-->
+    <div class="TelCount">
+        <ul>
+            <li>
+                <span>中国</span>
+                <span class="telSelect">+86</span>
+            </li>
+            <li>
+                <span>中国香港</span>
+                <span class="telSelect">+852</span>
+            </li>
+            <li>
+                <span>中国台湾</span>
+                <span class="telSelect">+886</span>
+            </li>
+            <li>
+                <span>美国</span>
+                <span class="telSelect">+1</span>
+            </li>
+            <li>
+                <span>日本</span>
+                <span class="telSelect">+81</span>
+            </li>
+            <li>
+                <span>中国台湾</span>
+                <span class="telSelect">+886</span>
+            </li>
+        </ul>
+    </div>
+</block>
+<block name="jsDiv">
+    <script type="text/javascript" >
+        $(function () {
+            resizeSize();
+            $(window).resize(function () {
+                resizeSize();
+            })
+            function resizeSize() {
+                var posTop= $(".posTop").offset().top,
+                    posleft=$(".posTop").offset().left,
+                    posHeight=$(".posTop").innerHeight(),
+                    posWidth=$(".posTop").innerWidth(),
+                    $height =posTop+posHeight;
+                console.log(posleft)
+                $(".TelCount").css({'top':$height,'left':posleft,'width':posWidth});
+                //点击出现电话列表
+                $(".mobile-country").click(function (event) {
+                    $(".TelCount").show();
+                    event.stopPropagation();
+                })
+
+            }
+            //点击电话列表选择
+            $(".TelCount>ul>li").click(function (event) {
+                var $text = $(this).children('.telSelect').text();
+                $(".mobile-country").text($text)
+                $(".TelCount").hide();
+                event.stopPropagation();
+            })
+
+            //
+            $('body').click(function () {
+                $(".TelCount").hide();
+            })
+        })
+    </script>
+</block>

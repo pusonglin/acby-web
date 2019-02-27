@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<definitions name="HISService" targetNamespace="urn:HISService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:HISService" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<types xmlns="http://schemas.xmlsoap.org/wsdl/" />
+<portType name="HISServicePort"><operation name="HISServiceAPI">
+<input message="tns:HISServiceAPIRequest" />
+<output message="tns:HISServiceAPIResponse" />
+</operation>
+</portType>
+<binding name="HISServiceBinding" type="tns:HISServicePort">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+<operation name="HISServiceAPI">
+<soap:operation soapAction="urn:HISService#HISService#HISServiceAPI" />
+<input><soap:body use="encoded" namespace="urn:HISService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:HISService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+</binding>
+<service name="HISService">
+<documentation />
+<port name="HISServicePort" binding="tns:HISServiceBinding"><soap:address location="http://api.dydbpt.com:80/service/HISService.php" />
+</port>
+</service>
+<message name="HISServiceAPIRequest">
+<part name="action" type="xsd:string" />
+<part name="message" type="xsd:string" />
+</message>
+<message name="HISServiceAPIResponse">
+<part name="HISServiceAPI" type="xsd:string" />
+</message>
+</definitions>

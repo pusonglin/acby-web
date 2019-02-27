@@ -1,0 +1,320 @@
+<extend name="public/base" />
+<block name="body">
+    <div class="lineMain rt_wrap" style="width: 98%;height:auto;">
+        <div class="layui-row  layui-col-space22  ">
+            <div class="layui-col-md3 layui-col-sm3 layui-col-xs6 linered">
+                <div class="lay_box">
+                    <div class="lay_title">
+                        <span>今日文档更新</span>
+                        <!--<span>+10%</span>-->
+                    </div>
+
+                    <div class="lay_number">
+                        <span id="member_num">0</span>个
+                    </div>
+
+                    <p>今日更新文档</p>
+                </div>
+            </div>
+            <div class="layui-col-md3 layui-col-sm3 layui-col-xs6 linered ">
+                <div class="lay_box">
+                    <div class="lay_title">
+                        <span>今日视频更新</span>
+                        <!--<span>+10%</span>-->
+                    </div>
+
+                    <div class="lay_number">
+                        <span id="group_num">0</span>个
+                    </div>
+
+                    <p>今日文档更新</p>
+                </div>
+            </div>
+            <div class="layui-col-md3 layui-col-sm3 layui-col-xs6 linered ">
+                <div class="lay_box">
+                    <div class="lay_title">
+                        <span>今日网页浏览数</span>
+                        <!--<span>+10%</span>-->
+                    </div>
+
+                    <div class="lay_number">
+                        <span id="activity_num">0</span>次
+                    </div>
+
+                    <p>今日网页浏览数</p>
+                </div>
+            </div>
+            <div class="layui-col-md3 layui-col-sm3 layui-col-xs6 linered ">
+                <div class="lay_box">
+                    <div class="lay_title">
+                        <span>今日文档下载数</span>
+                        <!--<span>+10%</span>-->
+                    </div>
+
+                    <div class="lay_number">
+                        <span id="dues_num">0</span>个
+                    </div>
+
+                    <p>今日文档下载数</p>
+                </div>
+            </div>
+        </div><!--/layui-row-->
+
+        <!--文库统计-->
+        <div class="lintbot lineGrey topMaring">
+            <h4>文库发布</h4>
+            <div class="pandapia_Broken" id="library"></div>
+        </div>
+
+        <div class="layui-row  layui-col-space22 layMargin">
+            <!--文档更新数量 图表-->
+            <div class="layui-col-md6 layui-col-sm6 layui-col-xs12 linered">
+                <div class="tuHeight lineGrey">
+                    <h4>文档更新数量 <!--<a href="javascript:;">···</a>--></h4>
+                    <div class="height_h" id="activeKz"></div>
+                </div><!--/tuHeight-->
+            </div>
+            <!--视频浏览分类 图表-->
+            <div class="layui-col-md6 layui-col-sm6 layui-col-xs12 linered">
+                <div class="tuHeight lineGrey">
+                    <h4> 用户喜好<!--<a href="javascript:;">···</a>--></h4>
+                    <div class="height_h" id="dy_Age"></div>
+                </div><!--/tuHeight-->
+            </div>
+
+            <!--用户喜好 图表-->
+            <div class="layui-col-md6 layui-col-sm6 layui-col-xs12 linered">
+                <div class="tuHeight lineGrey">
+                    <h4> 视频浏览分类<!--<a href="javascript:;">···</a>--></h4>
+                    <div class="height_h" id="df_Money"></div>
+                </div><!--/tuHeight-->
+            </div>
+
+            <!--用户下载量 图表-->
+            <div class="layui-col-md6 layui-col-sm6 layui-col-xs12 linered">
+                <div class="tuHeight lineGrey">
+                    <h4>用户下载量 <!--<a href="javascript:;">···</a>--></h4>
+                    <div class="height_h" id="dy_Live"></div>
+                </div><!--/tuHeight-->
+            </div>
+        </div>
+    </div>
+</block>
+<block name="footer">
+    <js href="__COMMON__/echarts/echarts.min.js" />
+    <script type="text/javascript">
+        $(function () {
+            $.post(hostUrl+'/home/index',{flag:'all'},function(datas){
+                var cur = datas['cur'];
+                console.log(cur)
+                $('#member_num').html(cur['party_num']);
+                $('#group_num').html(cur['group_num']);
+                $('#activity_num').html(cur['member_num']);
+                $('#dues_num').html(cur['party_member_num']);
+
+                //文库发布
+                var data = datas['data'];
+                var library = echarts.init(document.getElementById('library'));
+                var option = {
+                    title : {
+                        text: '',
+                        subtext: ''
+                    },
+                    color:['#71C551','#FC643D','#7ACC5B'],
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['文档','视频','其他']
+                    },
+                    toolbox: {
+                        show : false,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : eval(data['date'])
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'文档',
+                            type:'line',
+                            smooth:true,
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: eval(data['party_news_num'])
+                        },
+                        {
+                            name:'视频',
+                            type:'line',
+                            smooth:true,
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: eval(data['news_num'])
+                        },
+                        {
+                            name:'其他',
+                            type:'line',
+                            smooth:true,
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: eval(data['party_num'])
+                        }
+                    ]
+                };
+                library.setOption(option);
+
+                //文档更新数量
+                var activeKz = echarts.init(document.getElementById('activeKz'));
+                option = {
+                    legend: {
+                        data:['文档更新数量'],
+                        y:10,
+                        x:10
+                    },
+                    color:['#50D166'],
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: eval(data['date'])
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name:'文档更新数量',
+                        data: eval(data['party_news_num']),
+                        type: 'line'
+                    }]
+                };
+
+                activeKz.setOption(option);
+
+                //文档分类
+                var doc = datas['doc'];
+                console.log(doc)
+                var dy_Age = echarts.init(document.getElementById('dy_Age'));
+                option = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'horizontal',
+                        x: 'left',
+                        y:10,
+                        data:['PHP','JAVA','C++','Ruby']
+                    },
+                    color:['#D4726F','#31A4FF','#50D166','#5553CE','#27B940','#FE5D21'],
+                    series: [
+                        {
+                            name:'文档分类',
+                            type:'pie',
+                            radius: ['70%', '30%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:doc
+                        }
+                    ]
+                };
+
+                dy_Age.setOption(option);
+
+                //视频浏览分类
+                var df_Money=echarts.init(document.getElementById('df_Money'));
+                option = {
+                    legend: {
+                        data:['视频浏览分类'],
+                        y:10,
+                        x:10
+                    },
+                    color:['#FE5D21'],
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: eval(data['date'])
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name:'视频浏览分类',
+                        data: eval(data['news_num']),
+                        type: 'bar'
+                    }]
+                };
+
+                df_Money.setOption(option);
+
+                //用户下载量
+                var dy_Live=echarts.init(document.getElementById('dy_Live'));
+                option = {
+                    legend: {
+                        data:['用户下载量'],
+                        y:10,
+                        x:10
+                    },
+                    color:['#1ACEB3'],
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: eval(data['date'])
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name:'用户下载量',
+                        data: eval(data['register_num']),
+                        type: 'line'
+                    }]
+                };
+                dy_Live.setOption(option);
+
+                $(window).resize(function(){
+                    library.resize();
+                    activeKz.resize();
+                    activeKz.resize();
+                    dy_Age.resize();
+                    df_Money.resize();
+                    dy_Live.resize();
+                });
+            },'json');
+        });
+    </script>
+</block>

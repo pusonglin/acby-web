@@ -1,0 +1,86 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">用户管理</li>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.username" data-type="like" autocomplete="off" placeholder="姓名...">
+                            </div>
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.phone" data-type="like" autocomplete="off" placeholder="手机号...">
+                            </div>
+                            <div class="layui-inline">
+                                <select class="reload-search" data-name="a.status" data-type="eq" placeholder="全部">
+                                    <option value="">全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="2">停用</option>
+                                </select>
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--状态-->
+    <script type="text/html" id="tpl_status">
+        {{# if(d.username=='lvguozhong'){ }}
+        <input type="checkbox" lay-skin="switch" disabled lay-text="是|否" {{ d.status == 1 ? 'checked' : '' }} >
+        {{# }else{ }}
+        <input type="checkbox" name="status" value="{{d.id}}" data-true="1" data-false="2" data-tb="admin" lay-skin="switch" lay-text="是|否" lay-filter="setZdVal" {{ d.status == 1 ? 'checked' : '' }}>
+        {{# } }}
+    </script>
+
+    <!--状态-->
+    <script type="text/html" id="tpl_sex">
+        {{# if(d.sex==1){ }}
+            男
+        {{# }else{ }}
+            女
+        {{# } }}
+    </script>
+
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+          <a lay-event="detail" data-href="{:url('memberDetail')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/rbac/member';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:38},
+            {field: 'username', title: '姓名',width:122},
+            {field: 'phone', title: '手机'},
+            {field: 'status', title: '是否启用',width:78, templet: '#tpl_status'},
+            {field: 'province', title: '省份',width:109},
+            {field: 'sex', title: '是否启用',width:78, templet: '#tpl_sex'},
+            {field: 'login_ip', title: '最近登陆'},
+            {fixed: 'right', title: '操作管理',width:142, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+
+        //隐藏上传file
+        function hide_file() {
+            $('input[name=file]').attr('type','hidden');
+        }
+    </script>
+</block>

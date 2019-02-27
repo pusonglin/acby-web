@@ -1,0 +1,109 @@
+<extend name="public/base" />
+<block name='title'>{$title}-爱车保养</block>
+<block name="css">
+    <style>
+        .countlist{
+            max-width: 760px;
+        }
+        img{
+            margin: 0 auto!important;
+        }
+        body{
+          background-color: #fff;
+        }
+    </style>
+</block>
+<block name="body">
+    <div class="count" style="max-width: 760px">
+        <div  style="padding:  40px 24px 0;width: 100%">
+            <h1 style="height: 24px;line-height: 24px;font-size: 24px;font-weight: 400;color: #333">{$title}</h1>
+            <p style="line-height: 20px;color: #828a92;font-size: 12px;padding-top: 12px">收录了{$title}话题下的{$count}篇文章</p>
+        </div>
+        <div class="count_fl fl">
+        <div class="recommend styleTop2">
+            <div class="recommendlie">
+                <volist name="cur" id="v" >
+                    <div class="recommend_list">
+                        <div class="recommend_list_fl " <empty name="v.cover"> style="margin:0"</empty>>
+                            <h6><a href="{$v.href}">{$v.title}</a></h6>
+                            <p class="editor_re">{$v.summary}</p>
+                            <p  class="editor_p">
+                                作者: <a href="#">{$v.source}</a>
+                            </p>
+
+                            <div class="recommend_tag">
+                                <div class="fl">
+                                    <volist name="v.type" id="val">
+                                        <a href="{:url('News/typeList')}?flag={$val.id}&title={$val.name}">{$val.name}</a>
+                                    </volist>
+                                </div>
+
+                                <span class="fr">{$v.create_time}</span>
+                            </div>
+                        </div><!--/recommend_list_fl-->
+                        <notempty name="v.cover">
+                            <div class="recommend_list_fr ">
+                                <a href="{$v.href}">
+                                    <img src="{$v.cover}" alt="">
+                                </a>
+                            </div>
+                        </notempty>
+
+                    </div>
+                </volist>
+            </div><!--/recommendlie-->
+            <if condition="count($cur) lt 20">
+                <div class="noMore">没有了更多</div>
+                <else/>
+                <div class="buttonMore">加载更多</div>
+            </if>
+        </div><!--/recommend-->
+        </div>
+    </div><!--/count_fl-->
+    </div>
+</block>
+<block name="jsDiv">
+    <script type="text/javascript" >
+        $(function () {
+            //联系我们 - 我要投稿 弹层
+            var page=2;
+
+
+            $('body').on('click','.buttonMore',function () {
+                var url='news/typelist'
+                var list=getAjax(url,{page:page},'post');
+                if(listlength>0){
+                    page++;
+                    var str='';
+                    $.each(list,function (i,v) {
+                        if(v['cover']!=''){
+                            var margin='0 230px 0 0';
+                        }else{
+                            var margin='0';
+                        }
+                        str+='<div class="recommend_list"><div class="recommend_list_fl " style="margin: '+margin+'"><h6><a href="'+v['href']+'">'+v['title']+'</a></h6>';
+                        str+='<p class="editor_re">'+v['summary']+'</p><p  class="editor_p">作者: <a href="#">'+v['source']+'</a></p>';
+                        str+='<div class="recommend_tag"><div class="fl">';
+                        $.each(v['type'],function (j,val) {
+                            str+='<a href="/news/typelist.html?flag='+val['id']+'&title='+val['name']+'">'+val['name']+'</a>';
+                        })
+                        str+='</div><span class="fr">'+v['create_time']+'</span></div></div>';
+                        if(v['cover']!=''){
+                            str+='<div class="recommend_list_fr "><a href="'+v['href']+'"><img src="'+v['cover']+'" alt=""></a></div>';
+                        }
+                        str+='</div>';
+                    });
+                    $('.recommendlie').append(str);
+                    if(list.length<20){
+                        $('.buttonMore').addClass('noMore').html('没有更多了').removeClass('buttonMore');
+                    }
+                }else{
+                    $('.buttonMore').addClass('noMore').html('没有更多了').removeClass('buttonMore');
+                }
+                console.log(list)
+            })
+
+        })
+
+    </script>
+</block>

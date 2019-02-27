@@ -1,0 +1,74 @@
+<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap_head content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">用户详情</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <fieldset class="layui-elem-field">
+                                <legend>基本信息</legend>
+                                <div class="layui-row layui-col-space15">
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header" style="border-bottom: none;">用户头像</div>
+                                            <div class="layui-card-body">
+                                                <img src="{$cur.headimg}" width="80" height="80"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header">用户姓名</div>
+                                            <div class="layui-card-body">{$cur.username}</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header">手机号码</div>
+                                            <div class="layui-card-body">{$cur.phone}</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header">性别</div>
+                                            <div class="layui-card-body"><eq name="cur.sex" value="1">男<else/>女</eq></div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header">生日</div>
+                                            <div class="layui-card-body">{$cur.birth_info}</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header">最近登陆IP</div>
+                                            <div class="layui-card-body">{$cur.login_ip}</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header">省份</div>
+                                            <div class="layui-card-body">{$cur.province}</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-card">
+                                            <div class="layui-card-header">状态</div>
+                                            <div class="layui-card-body"><eq name="cur.status" value="1">正常<else/>冻结</eq></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

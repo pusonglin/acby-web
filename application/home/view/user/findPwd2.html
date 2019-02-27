@@ -1,0 +1,108 @@
+<extend name="public/base_no_header" />
+<block name='title'>找回密码</block>
+<block name="css">
+    <style>
+        body{
+            background: #fff;
+        }
+    </style>
+</block>
+<block name="body">
+    <div class="loginCont">
+        <div class="loginBg"></div>
+        <div class="loginCenter">
+            <div class="logoImg"> <img src="__IMG__/logo.png" alt=""></div>
+
+            <h3>修改密码</h3>
+            <p>密码长度6~24位，可以是 数字、字母等任意字符</p>
+            <div class="loginInfo">
+
+
+                <div class="form-row">
+                    <div class="loginInpt login_flex">
+                        <input type="password"  placeholder="输入新密码">
+                    </div>
+                </div><!--/form-row-->
+
+                <div class="form-row">
+                    <div class="loginInpt login_flex">
+                        <input type="password"  placeholder="确认新密码">
+                    </div>
+                </div><!--/form-row-->
+            </div><!--/loginInfo-->
+
+
+            <div class="login_btn" >确定</div>
+
+        </div><!--/loginCenter-->
+    </div>
+
+
+    <!--选择地区电话号码-->
+    <div class="TelCount">
+        <ul>
+            <li>
+                <span>中国</span>
+                <span class="telSelect">+86</span>
+            </li>
+            <li>
+                <span>中国香港</span>
+                <span class="telSelect">+852</span>
+            </li>
+            <li>
+                <span>中国台湾</span>
+                <span class="telSelect">+886</span>
+            </li>
+            <li>
+                <span>美国</span>
+                <span class="telSelect">+1</span>
+            </li>
+            <li>
+                <span>日本</span>
+                <span class="telSelect">+81</span>
+            </li>
+            <li>
+                <span>中国台湾</span>
+                <span class="telSelect">+886</span>
+            </li>
+        </ul>
+    </div>
+</block>
+
+<block name="jsDiv">
+    <script type="text/javascript" >
+        $(function () {
+            resizeSize();
+            $(window).resize(function () {
+                resizeSize();
+            })
+            function resizeSize() {
+                var posTop= $(".posTop").offset().top,
+                    posleft=$(".posTop").offset().left,
+                    posHeight=$(".posTop").innerHeight(),
+                    posWidth=$(".posTop").innerWidth(),
+                    $height =posTop+posHeight;
+                console.log(posleft)
+                $(".TelCount").css({'top':$height,'left':posleft,'width':posWidth});
+                //点击出现电话列表
+                $(".mobile-country").click(function (event) {
+                    $(".TelCount").show();
+                    event.stopPropagation();
+                })
+
+            }
+            //点击电话列表选择
+            $(".TelCount>ul>li").click(function (event) {
+                var $text = $(this).children('.telSelect').text();
+                $(".mobile-country").text($text)
+                $(".TelCount").hide();
+                event.stopPropagation();
+            })
+
+            //
+            $('body').click(function () {
+                $(".TelCount").hide();
+            })
+        })
+    </script>
+</block>

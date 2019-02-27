@@ -1,0 +1,71 @@
+<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">页面管理</li>
+                    <eq name="_right.delPage" value="1">
+                        <button data-href="{:url('delPage')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name="_right.doPage" value="1">
+                        <button data-href="{:url('doPage')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加页面</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.title" data-type="like" autocomplete="off" placeholder="页面名称...">
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <a lay-event="detail" data-href="{:url('block')}?page_id={{d.id}}" class="layui-btn layui-btn-primary layui-btn-xs">广告位</a>
+        <eq name='_right.viewPage' value='1'>
+            {{# if(d.url!='javascript:;'){ }}
+            <a href="{:url('viewPage')}?page_id={{d.id}}" target="_blank" class="layui-btn layui-btn-primary layui-btn-xs">预览</a>
+            {{# } }}
+        </eq>
+        <eq name='_right.pubPage' value='1'>
+            <a lay-event="del" data-href="{:url('pubPage')}" data-id="{{d.id}}" data-msg="确认要发布吗？" class="layui-btn layui-btn-normal layui-btn-xs">发布</a>
+        </eq>
+        <eq name='_right.doPage' value='1'>
+            <a lay-event="edit" data-href="{:url('doPage')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">编辑</a>
+        </eq>
+        <eq name='_right.delPage' value='1'>
+            <a lay-event="del" data-href="{:url('delPage')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.viewPage neq 1 AND $_right.pubPage neq 1 AND $_right.doPage neq 1 AND $_right.delPage neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/block/page';
+        var cols = [[ //表头
+            {type:'checkbox'},
+            {field: 'id', title: 'ID'},
+            {field: 'title', title: '页面名称'},
+            {field: 'pub_time', title: '最近发布时间'},
+            {field: 'realname', title: '最近发布人'},
+            {fixed: 'right', title: '操作管理',width:241, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+    </script>
+</block>

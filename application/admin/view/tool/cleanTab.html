@@ -1,0 +1,34 @@
+﻿<extend name="/public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">清空数据</li>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>数据表名</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="tab"  lay-verify="required" placeholder="请填写数据表名" autocomplete="off" class="layui-input" />
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">表名不需带前缀！数据清空不可恢复，请谨慎操作！</div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-url="{:url('cleanTab')}" data-open="self">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

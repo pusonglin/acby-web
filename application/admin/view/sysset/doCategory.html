@@ -1,0 +1,79 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>栏目名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="name"  lay-verify="required" placeholder="请填写栏目名称" autocomplete="off" class="layui-input" value="{$cur.name}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>所属栏目</label>
+                                    <div class="layui-input-inline">
+                                        <select id="pid" name="pid" lay-filter="pid" lay-verify="required" placeholder="请选择所属栏目" lay-search>
+                                            <option value="">请选择所属栏目</option>
+                                            <eq name="cur.pid" value="0">
+                                                <option data-type="0" value="0" selected="selected">作为一级栏目</option>
+                                                <else/>
+                                                <option data-type="0" value="0">作为一级栏目</option>
+                                            </eq>
+                                            {:create_select_list($optionList,$cur['pid'])}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">备注信息</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="summary" placeholder="请填写备注信息" autocomplete="off" class="layui-input" value="{$cur.summary}" />
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item icon" <neq name="cur.pid" value="0">style="display: none;" </neq> >
+                                    <label class="layui-form-label"><b class="is_must">*</b>栏目编号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="code" placeholder="请填写栏目编号" autocomplete="off" class="layui-input" value="{$cur.code}">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">编号是作为栏目数据读取的唯一标识，不能与已有的编号重复！</div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneCategory')}" data-back="{:url('category')}?_t={:time()}#'.$cur['id']">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="footer">
+    <script type="text/javascript">
+        $(function(){
+            var form = layui.form;
+            form.on('select(pid)', function(data){
+                if(data.value==0){
+                    $('.icon').show(300);
+                    $('input[name=code]').attr('lay-verify','required');
+                }else{
+                    $('.icon').hide(300);
+                    $('input[name=code]').removeAttr('lay-verify').val('');
+                }
+                form.render();
+            });
+        });
+    </script>
+</block>

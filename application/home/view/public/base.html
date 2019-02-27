@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><block name='title'></block></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <css href="__COMMON__/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <css href="__COMMON__/mCustomScrollbar/jquery.mCustomScrollbar.css" />
+    <css href="__COMMON__/layer/css/mobile/need/layer.css" />
+    <css href="__CSS__/base.css" />
+    <block name="css"></block>
+    <link rel="icon" href="__COMMON__/img/favicon.ico" type="image/x-icon"/>
+    <js href="__JS__/birthday.js" />
+    <js href="__JS__/common.js" />
+    <js href="__COMMON__/js/jquery.min.js" />
+    <js href="__COMMON__/js/jquery-migrate-1.2.1.min.js" />
+    <js href="__COMMON__/js/jquery.pseudo.js" /><!--before/after-->
+    <js href="__COMMON__/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js" />
+    <js href="__COMMON__/layer/layer.js" />
+    <js href="__COMMON__/js/dotdotdot.js" />
+    <css href="__COMMON__/swiper/swiper-4.0.7.min.css" />
+    <js href="__COMMON__/swiper/swiper-4.0.7.min.js" />
+    <!--[if lt IE 9]>
+    <js href="__COMMON__/html5.js" />
+    <js href="__COMMON__/css3-mediaqueries.js" />
+    <![endif]-->
+        <script type="text/javascript" >
+            $(function () {
+
+                //头像下拉菜单
+                $(".afterlogin").hover(function () {
+                    $(".afterList").fadeIn(300);
+                },function () {
+                    $(".afterList").fadeOut(300);
+                })
+                //
+                $(".nav>a").click(function () {
+                    $(this).addClass('active').siblings().removeClass('active')
+                })
+
+                var swiper = new Swiper('.swiper-container', {
+                    width: window.innerWidth,
+                    spaceBetween: 0,
+                    slidesPerView:1,
+                    centeredSlides: true,
+                    loop:true,
+                    observer:true,
+                    observeParents:true,
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    on:{
+                        slideChangeTransitionStart: function(){
+                            $(".swiperTitlebox>div").removeClass("active");
+                            $(".swiperTitlebox>div").eq(this.realIndex).addClass("active");
+                        },
+                    }
+
+                });
+
+                ///
+                $('.threeNav').click(function () {
+                    $(".sideslipBox").addClass('active');
+                    $('html').addClass('active')
+                })
+
+                $(".sideslipBox").click(function (even) {
+                    $(".sideslipBox").removeClass('active');
+                    $('html').removeClass('active')
+                    even.stopPropagation()
+                })
+
+                $(".nav>a").hover(function () {
+                    var $index =$(".nav>a").index($(this)),
+                        $listbox = $(this).parents(".header").children(".navBox"),
+                        $list = $listbox.children('.navList');
+                    $listbox.removeClass('active');
+                    $list.removeClass('active');
+
+                    //箭头
+                    var $navleft = $(this).offset().left,
+                        $width = $(this).outerWidth()/2-10;
+                    $(".threeArrow").css("left",$navleft+$width);
+                    $(".threeArrow").removeClass('active');
+                    for( var i = 0;  i<$listbox.length; i++){
+                        var aa  =  $(".navBox").eq(i).attr("data-index")
+                        if($index==aa){
+                            $(".navBox").eq(i).addClass('active');
+                            $(".navBox").eq(i).children('.navList').addClass('active');
+                            $(".threeArrow").addClass('active');
+                        }
+                    }
+                },function () {
+                    $listbox = $(this).parents(".header").children(".navBox"), //大框
+                        $list = $listbox.children('.navList');//显示小框
+                    $listbox.removeClass('active');
+                    $list.removeClass('active');
+                    $(".threeArrow").removeClass('active');
+                })
+
+                $(".navList").hover(function () {
+                    $(this).addClass('active');
+                    $(".threeArrow").addClass('active');
+                },function () {
+                    $(this).removeClass('active');
+                    $(".threeArrow").removeClass('active');
+                })
+
+
+                $(".ydNav>a").click(function () {
+                    $(this).addClass('active').siblings().removeClass('active')
+                })
+
+                var wytg;
+                $(".tgNav").click(function () {
+                    wytg= layer.open({
+                        type: 1,
+                        title:false,
+                        skin: 'layui-radius',
+                        closeBtn: 0,
+                        anim: 2,
+                        shadeClose: false,
+                        area: ['425px', 'auto'],
+                        content:$(".wytg")
+                    });
+                })
+
+                $("body").on('click','.contribute',function () {
+                    layer.close(wytg);
+                })
+
+
+                //联系我们 - 商务合作 弹层
+
+                var swhz;
+                $(".swNav").click(function () {
+                    swhz= layer.open({
+                        type: 1,
+                        title:false,
+                        skin: 'layui-radius',
+                        closeBtn: 0,
+                        anim: 2,
+                        shadeClose: false,
+                        area: ['310px', 'auto'],
+                        content:$(".swhz")
+                    });
+                })
+
+                $("body").on('click','.contribute',function () {
+                    layer.close(swhz);
+                })
+
+            })
+
+        </script>
+</head>
+<body>
+<div class="header">
+    <div class="header_center">
+        <!--移动端  显示菜单按钮-->
+        <span class="threeNav"></span>
+        <div class="logo"><img src="__IMG__/logo.png" alt=""></div>
+        <div class="nav">
+            <a href="{:url('index/index')}"  class="active"><span>首页</span></a>
+            <a href="#"><span>资讯</span> <img src="__IMG__/arrow.png" alt=""></a>
+            <a href="#"><span>政策</span> <img src="__IMG__/arrow.png" alt=""></a>
+            <a href="{:url('Developing/noPage')}"><span>活动</span></a>
+            <a href="{:url('Developing/noPage')}"><span>专题</span></a>
+            <a href="#"><span>资源交易平台</span> <img src="__IMG__/arrow.png" alt=""></a>
+            <a href="#"><span>联系我们</span> <img src="__IMG__/arrow.png" alt=""></a>
+        </div>
+
+        <!--登录 注册-->
+        <!--<div class="register">-->
+            <!--<a href="{:url('User/login')}">登录</a>-->
+            <!--<a href="{:url('User/register')}">注册</a>-->
+        <!--</div>&lt;!&ndash;/register&ndash;&gt;-->
+
+        <!--登录后显示-->
+        <div class="afterlogin">
+            <img src="__IMG__/downTx.png" alt="">
+
+             <div class="afterList">
+                    <div class="afterbox">
+                            <span></span>
+                            <div class="afterMes">
+                                <img src="__IMG__/downTx.png" alt="">
+                                <h4>名字名字名字名字</h4>
+                            </div>
+                            <div class="afterNav">
+                                <a href="{:url('My/index')}">我的主页</a>
+                                <a href="#">退出登录</a>
+                            </div>
+                    </div>
+             </div>
+        </div>
+    </div><!--/header_center-->
+
+    <!---->
+    <div class="threeArrow"></div>
+
+    <!--&lt;!&ndash;资讯下拉菜单&ndash;&gt;-->
+    <div class="navBox" data-index ='1'>
+        <div class="navList aa">
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav1.png" alt=""></span>
+                <h6>寻求报道</h6>
+                <p>最贴心的服务，最优质的的报道</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav2.png" alt=""></span>
+                <h6>近期活动</h6>
+                <p>提供最优价值的创投活动</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav3.png" alt=""></span>
+                <h6>需求融资</h6>
+                <p>最高效的融资对接服务</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav4.png" alt=""></span>
+                <h6>氪空间</h6>
+                <p>让办公更简单</p>
+            </a>
+        </div><!--/navList-->
+    </div><!--/navBox-->
+
+    <!--政策下拉菜单-->
+    <div class="navBox" data-index ='2'>
+        <div class="navList">
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav2.png" alt=""></span>
+                <h6>寻求报道</h6>
+                <p>最贴心的服务，最优质的的报道</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav2.png" alt=""></span>
+                <h6>近期活动</h6>
+                <p>提供最优价值的创投活动</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav2.png" alt=""></span>
+                <h6>需求融资</h6>
+                <p>最高效的融资对接服务</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav2.png" alt=""></span>
+                <h6>氪空间</h6>
+                <p>让办公更简单</p>
+            </a>
+        </div><!--/navList-->
+    </div><!--/navBox-->
+
+    <!--资源交易平台下拉菜单-->
+    <div class="navBox" data-index ='5'>
+        <div class="navList">
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav3.png" alt=""></span>
+                <h6>寻求报道</h6>
+                <p>最贴心的服务，最优质的的报道</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav3.png" alt=""></span>
+                <h6>近期活动</h6>
+                <p>提供最优价值的创投活动</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav3.png" alt=""></span>
+                <h6>需求融资</h6>
+                <p>最高效的融资对接服务</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <span class="spanImg"><img src="__IMG__/nav3.png" alt=""></span>
+                <h6>氪空间</h6>
+                <p>让办公更简单</p>
+            </a>
+        </div><!--/navList-->
+    </div><!--/navBox-->
+
+    <!--联系我们下拉菜单-->
+    <div class="navBox" data-index ="6">
+        <div class="navList">
+            <a href="javascript:;" class="tgNav">
+                <span class="spanImg"><img src="__IMG__/wytg.png" alt=""></span>
+                <h6>我要投稿</h6>
+                <p>提升影响力的最有效方式</p>
+            </a>
+
+            <a href="javascript:;" class="swNav">
+                <span class="spanImg"><img src="__IMG__/swhz.png" alt=""></span>
+                <h6>商务合作</h6>
+                <p>让品牌超越昨天，先见未来</p>
+            </a>
+        </div><!--/navList-->
+    </div><!--/navBox-->
+
+</div><!--/header-->
+<!--移动端导航侧滑-->
+<div class="sideslipBox">
+    <div class="sideslipNav">
+        <!--我要投稿--><!--我要报道--><!--我要合作-->
+        <div class="sideslip_three">
+            <a href="{:url('Developing/noPage')}">
+                <img src="__IMG__/tg.png" alt="">
+                <p>我要投稿</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <img src="__IMG__/bd.png" alt="">
+                <p>我要报道</p>
+            </a>
+
+            <a href="{:url('Developing/noPage')}">
+                <img src="__IMG__/hz.png" alt="">
+                <p>我要合作</p>
+            </a>
+        </div>
+
+        <div class="sideslipNav_A">
+            <a href="{:url('index/index')}"  class="active">首页</a>
+            <a href="#">资讯</a>
+            <a href="#">政策</a>
+            <a href="{:url('Developing/noPage')}">活动</a>
+            <a href="{:url('Developing/noPage')}">专题</a>
+            <a href="#">资源交易平台</a>
+            <a href="#">联系我们</a>
+        </div>
+    </div><!--/sideslipNav-->
+</div><!--/sideslipBox-->
+<div class="height_70"></div>
+<div class="body-box">
+    <block name="body"></block>
+</div>
+
+<!--联系我们 - 商务合作-->
+<div class="us_contribute swhz">
+    <div class="contribute ">
+        <ul>
+            <li>
+                <p>商务合作，请您联系：</p>
+                <h4>peigenl@sctengsen.com</h4>
+            </li>
+
+            <li>
+                <p>市场合作，请您联系：</p>
+                <h4>peigenl@sctengsen.com</h4>
+            </li>
+
+            <li>
+                <p>品牌广告合作，请您联系：</p>
+                <h4>peigenl@sctengsen.com</h4>
+            </li>
+
+            <li>
+                <p>企业创新合作，请您联系：</p>
+                <h4>peigenl@sctengsen.com</h4>
+            </li>
+
+            <li>
+                <p>地方合作，请您联系：</p>
+                <h4>peigenl@sctengsen.com</h4>
+            </li>
+
+        </ul>
+
+        <a href="javascript:;">我知道了</a>
+    </div>
+</div><!--/us_swhz-->
+<div class="footer">
+    <div class="laycenter">
+        <ul>
+            <li class="li_310">
+                <img src="__IMG__/logo.png" alt="">
+                <p>绿水青山就是金山银山</p>
+                <div class="tbTitle">
+                    <h6>特别专题</h6>
+                    <div>
+                        <a href="#">四川</a>
+                        <a href="#">乡村振兴</a>
+                        <a href="#">人才</a>
+                        <a href="#">产业化</a>
+                        <a href="#">农业农村部</a>
+                        <a href="#">信息化管理</a>
+                        <a href="#">结合特色产业实现农业现代化</a>
+                        <a href="#">帮扶</a>
+                        <a href="#">资金整合</a>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <h6>关于我们</h6>
+                <a href="{:url('System/systemArticle')}?jum_key=about_us">关于我们</a>
+                <a href="{:url('System/systemArticle')}?jum_key=about_ad">合作我们</a>
+                <a href="{:url('System/systemArticle')}?jum_key=join_us">加入我们</a>
+            </li>
+            <li>
+                <h6>联系我们</h6>
+                <a href="javascript:;">内容投稿：peigenl@sctengsen.com</a>
+                <a href="javascript:;">业务合作：peigenl@sctengsen.com</a>
+                <a href="javascript:;">反馈投诉：+86-181-8052-6888</a>
+            </li>
+
+            <li>
+                <h6>乡村振兴战略实施模式</h6>
+                <a href="javascript:;">丰信农业服务模式</a>
+                <a href="javascript:;">乡村振兴社员网模式</a>
+            </li>
+
+            <li>
+                <h6>五个振兴</h6>
+                <a href="javascript:;">产业振兴</a>
+                <a href="javascript:;">人才振兴</a>
+                <a href="javascript:;">文化振兴</a>
+                <a href="javascript:;">生态振兴</a>
+                <a href="javascript:;">组织振兴</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footBottom">Copyright ◎2019 pactera. All rights reserved. Sichuan ICp 11007858-3. Teng sen keji</div>
+</div><!--/footer-->
+
+<block name="jsDiv"></block>
+</body>
+</html>

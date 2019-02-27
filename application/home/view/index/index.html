@@ -1,0 +1,327 @@
+<extend name="public/base" />
+<block name='title'>爱车保养</block>
+<block name="css">
+    <css href="__COMMON__/swiper/swiper-4.0.7.min.css" />
+</block>
+<block name="jsDiv">
+    <js href="__COMMON__/swiper/swiper-4.0.7.min.js" />
+</block>
+<block name="body">
+
+
+
+
+
+
+    <!--移动端导航-->
+
+    <!--<div class="ydNavBox">-->
+    <!--<div class="ydNav">-->
+    <!--<a href="#"  class="active">首页</a>-->
+    <!--<a href="#">资讯</a>-->
+    <!--<a href="#">政策</a>-->
+    <!--<a href="#">活动</a>-->
+    <!--<a href="#">专题</a>-->
+    <!--<a href="#">资源交易平台</a>-->
+    <!--<a href="#">联系我们</a>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+
+    <div class="count">
+        <div class="count_fl fl">
+            <div class="main styleTop">
+                <div class="title">
+                    <img src="__IMG__/sc1.jpg" alt="">
+                    <span>精选内容</span>
+                </div>
+
+                <div class="choiceness">
+                    <volist name="data.essence" id="v" offset="0" length="1">
+                        <div class="choicenessOne">
+                            <div class="choicenessOne_fl fl">
+                                <a href="{$v.href}"> <img src="{$v.cover}" alt=""></a>
+                            </div><!--/choicenessOne_fl-->
+                            <div class="choicenessOne_fr pos fr">
+                                <h3><a href="{$v.href}">{$v.title}</a></h3>
+                                <p class="editor"> {$v.summary}</p>
+                                <p  class="editor_p">作者: <a href="#">{$v.source}</a></p>
+
+                                <div class="editorTag">
+                                    <volist name="v.type" id="val">
+                                        <a href="{:url('News/typeList')}?flag={$val.id}&title={$val.name}">{$val.name}</a>
+                                    </volist>
+                                </div>
+                            </div><!--/choicenessOne_fr-->
+                        </div><!--/choicenessOne-->
+                    </volist>
+                    <div class="choicenessTwo">
+                        <ul>
+                    <volist name="data.essence" id="v" offset="1" length="3">
+                        <li>
+                            <div class="choicenessImg">
+                                <a href="{$v.href}"><img src="{$v.cover}" alt=""></a>
+                            </div>
+
+                            <div class="choicenessFont">
+                                <h6><a href="{$v.href}">{$v.title}</a> </h6>
+                                <p class="editor_p">
+                                    作者: <a href="#">{$v.source}</a>
+                                </p>
+
+                                <div class="editorTag" style="margin: 10px 0 0 0">
+                                    <volist name="v.type" id="val">
+                                        <a href="{:url('News/typeList')}?flag={$val.id}&title={$val.name}">{$val.name}</a>
+                                    </volist>
+                                </div>
+                            </div><!--/choicenessFont-->
+                        </li>
+                    </volist>
+                        </ul>
+                    </div><!--/choicenessTwo-->
+
+                </div><!--/choiceness-->
+            </div><!--/main-->
+            <!--移动轮播图-->
+            <div class="swiper-container swiperSc">
+                <div class="swiper-wrapper">
+                    <volist name="data.essence" id="v">
+                        <div class="swiper-slide">
+                            <a href="{$v.href}"><img src="{$v.cover}" alt=""></a>
+                        </div><!--swiper-slide-->
+                    </volist>
+                </div><!--/swiper-wrapper-->
+
+                <div class="swiper-pagination"></div>
+            </div><!--/swiper-container-->
+
+            <div class="swiperTitlebox">
+                <volist name="data.essence" id="v" key="key">
+                <div class="swiperTitle">
+                    <h6>
+                        <a href="{$v.href}">
+                            {$key}、{$v.title}
+                        </a>
+                    </h6>
+                    <p  class="editor_p" style="margin: 10px 0">
+                        作者: <a href="#">{$v.source}</a>
+                    </p>
+                    <p class="swiper_p">
+                        {$v.summary}
+                    </p>
+                </div><!--/swiperTitle-->
+                </volist>
+            </div>
+
+            <!--推荐内容-->
+            <div class="recommend styleTop2">
+                <div class="title" style="padding:  0 24px">
+                    <img src="__IMG__/sc3.jpg" alt="">
+                    <span>推荐内容</span>
+                </div>
+
+                <div class="recommendlie">
+                    <volist name="data.push.list" id="v" offset="0" length="5">
+                    <div class="recommend_list">
+                        <div class="recommend_list_fl " <empty name="v.cover"> style="margin:0"</empty>>
+                            <h6><a href="{$v.href}">{$v.title}</a></h6>
+                            <p class="editor_re">{$v.summary}</p>
+                            <p  class="editor_p">
+                                作者: <a href="#">{$v.source}</a>
+                            </p>
+
+                            <div class="recommend_tag">
+                                <div class="fl">
+                                    <volist name="v.type" id="val">
+                                        <a href="{:url('News/typeList')}?flag={$val.id}&title={$val.name}">{$val.name}</a>
+                                    </volist>
+                                </div>
+
+                                <span class="fr">{$v.create_time}</span>
+                            </div>
+                        </div><!--/recommend_list_fl-->
+                        <notempty name="v.cover">
+                            <div class="recommend_list_fr ">
+                                <a href="{$v.href}">
+                                    <img src="{$v.cover}" alt="">
+                                </a>
+                            </div>
+                        </notempty>
+
+                    </div>
+                    </volist>
+
+                    <div  class="banner"><a href="{$data.push.ad[0]['href']}" target="_blank"><img src="{$data.push.ad[0]['cover']}" alt=""></a> </div>
+
+                    <if condition="count($data['push']['list']) gt 5">
+                    <volist name="data.push.list" id="v" offset="5" length="5">
+                        <div class="recommend_list">
+                            <div class="recommend_list_fl " <empty name="v.cover"> style="margin:0"</empty>>
+                                <h6><a href="{$v.href}">{$v.title}</a></h6>
+                                <p class="editor_re">{$v.summary}</p>
+                                <p  class="editor_p">
+                                    作者: <a href="#">{$v.source}</a>
+                                </p>
+
+                                <div class="recommend_tag">
+                                    <div class="fl">
+                                        <volist name="v.type" id="val">
+                                            <a href="{:url('News/typeList')}?flag={$val.id}&title={$val.name}">{$val.name}</a>
+                                        </volist>
+                                    </div>
+
+                                    <span class="fr">{$v.create_time}</span>
+                                </div>
+                            </div><!--/recommend_list_fl-->
+
+                            <notempty name="v.cover">
+                                <div class="recommend_list_fr ">
+                                    <a href="{$v.href}">
+                                        <img src="{$v.cover}" alt="">
+                                    </a>
+                                </div>
+                            </notempty>
+                        </div>
+                    </volist>
+
+                    <div  class="banner"><a href="{$data.push.ad[1]['href']}" target="_blank"><img src="{$data.push.ad[1]['cover']}" alt=""></a> </div>
+
+                    </if>
+                </div><!--/recommendlie-->
+                <if condition="count($data['push']['list']) lt 10">
+                    <div class="noMore">没有了更多</div>
+                    <else/>
+                    <div class="buttonMore">加载更多</div>
+                </if>
+            </div><!--/recommend-->
+
+        </div><!--/count_fl-->
+
+        <div class="count_fr fr">
+            <!--热点-->
+            <div class="hot styleTop">
+                <div class="title">
+                    <img src="__IMG__/sc2.jpg" alt="">
+                    <span>热点</span>
+                </div>
+
+                <div  class="hotlist">
+                    <volist name="data.hot" id="v" key="key">
+                        <p>
+                            <span>{$key}</span>
+                            <a href="{$v.href}">{$v.title}</a>
+                        </p>
+                    </volist>
+
+
+                </div><!--/hotlist-->
+            </div><!--/hot-->
+
+
+            <!---->
+            <div class="hot_banner styleTop">
+                <div class="hot_bannerImg">
+                    <a href="{$data.push.ad[0]['href']}"><img src="{:get_thumb_img($data.push.ad[0]['cover'],450,220)}" alt=""></a>
+                </div>
+
+                <p>{$data.push.ad[0]['title']}</p>
+                <br/>
+                <a href="{:url('Developing/noPage')}">了解更多 &gt;</a>
+                <br/><br/>
+                <span>更多活动，请参见 <a href="{:url('Developing/noPage')}">活动大本营</a></span>
+            </div><!--/hot_banner-->
+
+
+            <!--每周精选-->
+            <div class="weekly styleTop">
+                <div class="title">
+                    <img src="__IMG__/sc5.jpg" alt="">
+                    <span>每周精选</span>
+                </div>
+
+                <div class="weekImg"><a href="#"><img src="__IMG__/week.png" alt=""></a></div>
+                <p>
+                    订阅每周精要，加入资深开发者汇聚的庞大技术社区。
+                </p>
+            </div><!--/weekly-->
+
+            <!--关注我们-->
+            <div class="attention styleTop">
+                <div class="title">
+                    <img src="__IMG__/sc6.jpg" alt="">
+                    <span>关注我们</span>
+                    <a href="{:url('Developing/noPage')}"  class="moreLook">查看更多 &gt;</a>
+                </div>
+                <div class="weekImg wxCode"><a href="javascript:;"><img src="{:url('index/createQRCode')}" alt=""></a></div>
+            </div><!--/weekly-->
+        </div><!--/count_fr-->
+    </div><!--/count-->
+
+    <!--联系我们 - 我要投稿-->
+    <div class="us_contribute wytg">
+        <div class="contribute ">
+            <h4>如有投稿需求，请把文章发送到邮箱 peigenl@sctengsen.com， 一经录用会有专人和您联系</h4>
+
+            <a href="javascript:;">我知道了</a>
+        </div>
+    </div><!--/us_contribute-->
+
+
+
+</block>
+<block name="jsDiv">
+    <script type="text/javascript" >
+        $(function () {
+            //联系我们 - 我要投稿 弹层
+            var page=2;
+
+
+            $('body').on('click','.buttonMore',function () {
+                var url='index/index'
+                var list=getAjax(url,{page:page},'post');
+                if(list['list'].length>0){
+                    page++;
+                    var ad_len=list['ad'].length;
+                    var str='';
+                    $.each(list['list'],function (i,v) {
+                        if(i==5&&ad_len>0){
+                            str+='<div  class="banner"><a href="'+list['ad'][0]['href']+'" target="_blank"><img src="'+list['ad'][0]['cover']+'" alt=""></a> </div>';
+                        }
+                        if(v['cover']!=''){
+                            var margin='0 230px 0 0';
+                        }else{
+                            var margin='0';
+                        }
+                        str+='<div class="recommend_list"><div class="recommend_list_fl " style="margin: '+margin+'"><h6><a href="'+v['href']+'">'+v['title']+'</a></h6>';
+                        str+='<p class="editor_re">'+v['summary']+'</p><p  class="editor_p">作者: <a href="#">'+v['source']+'</a></p>';
+                        str+='<div class="recommend_tag"><div class="fl">';
+                        $.each(v['type'],function (j,val) {
+                            str+='<a href="/news/typelist.html?flag='+val['id']+'&title='+val['name']+'">'+val['name']+'</a>';
+                        })
+                        str+='</div><span class="fr">'+v['create_time']+'</span></div></div>';
+                        if(v['cover']!=''){
+                            str+='<div class="recommend_list_fr "><a href="'+v['href']+'"><img src="'+v['cover']+'" alt=""></a></div>';
+                        }
+                        str+='</div>';
+                    });
+                    if(ad_len==2&&list['list'].length>5){
+                        str+='<div  class="banner"><a href="'+list['ad'][1]['href']+'" target="_blank"><img src="'+list['ad'][1]['cover']+'" alt=""></a> </div>';
+                    }
+                    if(list['list'].length<=5&&ad_len>0){
+                        str+='<div  class="banner"><a href="'+list['ad'][0]['href']+'" target="_blank"><img src="'+list['ad'][0]['cover']+'" alt=""></a> </div>';
+                    }
+                    $('.recommendlie').append(str);
+                    if(list['list'].length<10){
+                        $('.buttonMore').addClass('noMore').html('没有更多了').removeClass('buttonMore');
+                    }
+                }else{
+                   $('.buttonMore').addClass('noMore').html('没有更多了').removeClass('buttonMore');
+                }
+                console.log(list)
+            })
+
+        })
+
+    </script>
+</block>

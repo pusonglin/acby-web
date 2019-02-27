@@ -1,0 +1,62 @@
+﻿<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>版本号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="version"  lay-verify="required" placeholder="请填写版本号" autocomplete="off" class="layui-input" value="{$cur.version}" />
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">版本号必须唯一！</div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>APP机型</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="type" value="1" title="IOS" <neq name="cur.type" value="2"> checked="checked"</neq> />
+                                        <input type="radio" name="type" value="2" title="Android" <eq name="cur.type" value="2"> checked="checked"</eq> />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>强制更新</label>
+                                    <div class="layui-input-inline">
+                                        <input type="radio" name="is_must" value="1" title="是" <eq name="cur.is_must" value="1"> checked="checked"</eq> />
+                                        <input type="radio" name="is_must" value="2" title="否" <neq name="cur.is_must" value="1"> checked="checked"</neq> />
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">设置为强制更新后，不更新则无法使用APP！</div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>下载地址</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="url"  lay-verify="required" placeholder="请填写下载地址" autocomplete="off" class="layui-input" value="{$cur.url}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">版本说明</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="remark" lay-verify="required" placeholder="请填写版本说明" class="layui-textarea">{$cur.remark}</textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneVersion')}" data-back="{:url('version')}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

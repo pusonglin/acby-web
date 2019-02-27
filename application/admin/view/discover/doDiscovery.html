@@ -1,0 +1,102 @@
+<extend name="public/base" />
+<block name='js'>
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.config.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.all.min.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/lang/zh-cn/zh-cn.js" />
+    <js href="__JS__/ueditor.js" />
+    <!--<js href="__JS__/library-doParty.js" />-->
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>标题</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title"  lay-verify="required" placeholder="请填写标题" autocomplete="off" class="layui-input" value="{$cur.title}" />
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>链接</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="url"  lay-verify="required" placeholder="请填写链接" autocomplete="off" class="layui-input cnToEn" value="{$cur.url}" />
+                                    </div>
+                                    <span class="justTips" style="margin-left: 110px;"><i class="fa fa-exclamation-triangle">以http://开头可访问的网页地址</i></span>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">封面</label>
+                                    <div class="layui-input-block uploadImg">
+                                        <div>
+                                            <ul class="imgbox" data-max="3" data-setcover="2">
+                                                <notempty name="cur.cover">
+                                                    <volist name="cur.cover" id="v">
+                                                        <li>
+                                                            <a href="{$v}" rel="group"><img src="{$v}" class="img"></a>
+                                                            <span class="fa fa-times up_del_btn on_show" title="删除"></span>
+                                                        </li>
+                                                    </volist>
+                                                </notempty>
+                                                <input type="hidden" name="cover" placeholder="请上传封面图片" value='{$cur.cover_json}' class="layui-input">
+                                            </ul>
+                                            <ul class="btnup" onclick="upImage('cover')">
+                                                <i id="cover" style="display: none;"></i>
+                                                <span class="fa fa-upload"><br/><br/>上传图片</span>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <span class="justTips"><i class="fa fa-exclamation-triangle"></i> 图片建议尺寸：800*600px；图片格式：jpg，png，jpeg，gif</span>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">排序</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="sort" placeholder="请填写排序" autocomplete="off" class="layui-input" value="{$cur.sort}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>是否发布</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="status" value="1" title="是" <neq name="cur.status" value="2"> checked="checked"</neq> />
+                                        <input type="radio" name="status" value="2" title="否" <eq name="cur.status" value="2"> checked="checked"</eq> />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item <gt name='cur.id' value='0'> hide_list </gt>">
+                                    <label class="layui-form-label"><b class="is_must">*</b>创建时间</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="create_time" placeholder="请填写创建时间" autocomplete="off" class="layui-input laydate-time" value="{$cur.create_time}">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneDiscovery')}" data-back="{:url('index')}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="footer">
+    <script type="text/javascript">
+        //封面图片上传
+        upload_imgs('cover');
+
+        //图片放大显示
+        fancyimg();
+
+    </script>
+</block>

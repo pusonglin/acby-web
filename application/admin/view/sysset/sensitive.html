@@ -1,0 +1,57 @@
+<extend name="public/base" />
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">敏感词库</li>
+                    <eq name='_right.delSensitive' value='1'>
+                        <button data-href="{:url('delSensitive')}" class="batch-btn layui-btn layui-btn-danger layui-btn-sm fr">批量删除</button>
+                    </eq>
+                    <eq name='_right.doSensitive' value='1'>
+                        <button data-href="{:url('doSensitive')}" class="layer_open_iframe layui-btn layui-btn-normal layui-btn-sm fr">添加敏感词</button>
+                    </eq>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--搜索-->
+                        <form class="layui-form table-reload">
+                            <div class="layui-inline">
+                                <input class="layui-input reload-search" data-name="a.keyword" data-type="like" autocomplete="off" placeholder="关键词...">
+                            </div>
+                            <button type="button" class="layui-btn reload-btn" data-type="reload">搜索</button>
+                        </form>
+
+                        <!--table列表-->
+                        <table id="table-list" lay-filter="table-list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--工具栏-->
+    <script type="text/html" id="toolbar">
+        <eq name='_right.delSensitive' value='1'>
+            <a lay-event="del" data-href="{:url('delSensitive')}" data-id="{{d.id}}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+        </eq>
+        <if condition="$_right.delSensitive neq 1">
+            暂无权限
+        </if>
+    </script>
+
+    <script type="text/javascript">
+        var tableId = 'table-list';
+        var url = '/sysset/sensitive';
+        var cols = [[ //表头
+            {type:'checkbox',width:38},
+            {field: 'id', title: 'ID',width:89, align: 'cetner' },
+            {field: 'keyword', title: '敏感词'},
+            {fixed: 'right', title: '操作管理',width:89, align:'center', templet: '#toolbar'}
+        ]];
+
+        //初始化
+        initTable(tableId,url,cols);
+    </script>
+</block>

@@ -1,0 +1,420 @@
+<extend name="public/base" />
+<block name='title'>个人主页</block>
+<block name="body">
+    <div class="profile">
+        <div class="profileAuto">
+            <div class="profileTx">
+                <img src="__IMG__/downTx.png" alt="">
+            </div>
+            <div class="profileAdd">
+                <h4>小明小明</h4>
+                <div>
+                    <p class="p_text">还未添加我的签名</p>
+                    <a href="javascript:;" class="edit_a">编辑</a>
+                    <input type="text" class="amendInp" >
+                </div>
+            </div><!--/profileAdd-->
+        </div><!--/profileAuto-->
+    </div><!--/profile-->
+
+
+    <div class="profileSelect">
+        <div class="profileNav">
+            <a href="javascript:;" class="active">基本信息</a>
+            <a href="javascript:;">账号设置</a>
+            <a href="javascript:;">我的收藏</a>
+            <a href="javascript:;">我的评论</a>
+        </div>
+    </div><!---->
+
+    <div class="profileCount">
+        <div class="profileAuto">
+
+            <!--基本信息-->
+            <div class="profileList active" >
+                <ul>
+                    <li>
+                        <div class="tx_head">
+                            <span>头像:</span>
+                            <div class="profileTx_xg">
+                                <img src="__IMG__/downTx.png" alt="">
+                                <span><img src="__IMG__/cam.png" alt=""></span>
+                            </div>
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <div class="profile_C profile_Click">
+                            <span>昵称:</span>
+                            <div class="profile_name">
+                                <p class="p_name">小明小明</p>
+                                <a href="javascript:;">修改</a>
+                            </div>
+
+                            <!--修改显示-->
+                            <div class="profile_amend">
+                                <input type="text">
+                                <button class="btn_sava">保存</button>
+                                <button class="btn_cancel">取消</button>
+                            </div><!--/profile_amend-->
+                        </div><!--/profile_C-->
+                    </li>
+
+                    <li>
+                        <div class="profile_C profile_Click">
+                            <span>性别:</span>
+                            <div class="profile_name">
+                                <p class="p_sex">未设置</p>
+                                <a href="javascript:;">修改</a>
+                            </div>
+
+                            <!--修改显示-->
+                            <div class="profile_amend profile_label">
+
+                                <label>
+                                    <input type="radio" name="sex">
+                                    <em>男</em>
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="sex">
+                                    <em>女</em>
+                                </label>
+
+                                <button class="btn_sava">保存</button>
+                                <button class="btn_cancel">取消</button>
+                            </div><!--/profile_amend-->
+                        </div><!--/profile_C-->
+                    </li>
+
+
+                    <li>
+                        <div class="profile_C profile_Click">
+                            <span>生日:</span>
+                            <div class="profile_name">
+                                <p class="p_brithday">未设置</p>
+                                <a href="javascript:;">修改</a>
+                            </div>
+
+                            <!--修改显示-->
+                            <div class="profile_amend">
+                                <select class="birthday sel_year" rel="2000"> </select> 年
+                                <select class="birthday sel_month" rel="2"> </select> 月
+                                <select class="birthday sel_day" rel="14"> </select> 日
+                                <button class="btn_sava btnBridthday">保存</button>
+                                <button class="btn_cancel">取消</button>
+                            </div><!--/profile_amend-->
+                        </div><!--/profile_C-->
+                    </li>
+
+
+
+                </ul>
+            </div><!--/profileList-->
+
+            <!--账号设置-->
+            <div class="profileList">
+                <ul>
+                    <li>
+                        <div class="profile_C">
+                            <span>密码:</span>
+                            <div class="profile_name">
+                                <p>未设置</p>
+                                <a href="{:url('My/changePwd')}">修改</a>
+                            </div>
+                        </div><!--/profile_C-->
+                    </li>
+
+                    <li>
+                        <div class="profile_C">
+                            <span>手机号:</span>
+                            <div class="profile_name">
+                                <p>未设置</p>
+                                <a href="{:url('My/changePwd')}">修改</a>
+                            </div>
+                        </div><!--/profile_C-->
+                    </li>
+                </ul>
+            </div><!--/profileList-->
+
+            <!--我的收藏-->
+            <div class="profileList">
+                <div class="collect">
+                    <ul>
+                        <li>
+                            <div class="collect_img">
+                                <a href="list.html"><img src="__IMG__/img_420x311_3.jpg" alt=""></a>
+                                <span>删除</span>
+                            </div>
+                            <h4><a href="#">国内首例：飞步无人卡车携手中国邮政、德邦投入日常运营</a> </h4>
+                            <p>作者: <a href="#">Debra</a> </p>
+                            <div class="collect_a">
+                                <a href="list.html">AI</a>
+                                <a href="#">自动驾驶</a>
+                                <a href="#">最佳实践</a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="collect_img">
+                                <a href="list.html"><img src="__IMG__/img_420x311_3.jpg" alt=""></a>
+                                <span>删除</span>
+                            </div>
+                            <h4><a href="list.html">国内首例：飞步无人卡车携手中国邮政、德邦投入日常运营</a> </h4>
+                            <p>作者: <a href="#">Debra</a> </p>
+                            <div class="collect_a">
+                                <a href="#">AI</a>
+                                <a href="#">自动驾驶</a>
+                                <a href="#">最佳实践</a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="collect_img">
+                                <a href="#"><img src="__IMG__/img_420x311_3.jpg" alt=""></a>
+                                <span>删除</span>
+                            </div>
+                            <h4><a href="#">国内首例：飞步无人卡车携手中国邮政、德邦投入日常运营</a> </h4>
+                            <p>作者: <a href="#">Debra</a> </p>
+                            <div class="collect_a">
+                                <a href="#">AI</a>
+                                <a href="#">自动驾驶</a>
+                                <a href="#">最佳实践</a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="collect_img">
+                                <a href="#"><img src="__IMG__/img_420x311_3.jpg" alt=""></a>
+                                <span>删除</span>
+                            </div>
+                            <h4><a href="#">国内首例：飞步无人卡车携手中国邮政、德邦投入日常运营</a> </h4>
+                            <p>作者: <a href="#">Debra</a> </p>
+                            <div class="collect_a">
+                                <a href="#">AI</a>
+                                <a href="#">自动驾驶</a>
+                                <a href="#">最佳实践</a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="collect_img">
+                                <a href="#"><img src="__IMG__/img_420x311_3.jpg" alt=""></a>
+                                <span>删除</span>
+                            </div>
+                            <h4><a href="#">国内首例：飞步无人卡车携手中国邮政、德邦投入日常运营</a> </h4>
+                            <p>作者: <a href="#">Debra</a> </p>
+                            <div class="collect_a">
+                                <a href="#">AI</a>
+                                <a href="#">自动驾驶</a>
+                                <a href="#">最佳实践</a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="collect_img">
+                                <a href="#"><img src="__IMG__/img_420x311_3.jpg" alt=""></a>
+                                <span>删除</span>
+                            </div>
+                            <h4><a href="#">国内首例：飞步无人卡车携手中国邮政、德邦投入日常运营</a> </h4>
+                            <p>作者: <a href="#">Debra</a> </p>
+                            <div class="collect_a">
+                                <a href="#">AI</a>
+                                <a href="#">自动驾驶</a>
+                                <a href="#">最佳实践</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div><!--/collect-->
+            </div><!--/profileList-->
+
+            <!--我的评论-->
+            <div class="profileList">
+                <div class="discuss">
+                    <ul>
+                        <li>
+                            <div class="discussTop">
+                                <h6>
+                                    <img src="__IMG__/mess.png" alt="">
+                                    <span>我的评论我的评论我的评论我的评论</span>
+                                </h6>
+                                <span>
+                                            <img src="__IMG__/del.png" alt="">
+                                        </span>
+                            </div>
+
+                            <div class="discussfont">
+                                <span>评论文章:</span>
+                                <a href="list.html">99% 的人并不知道 AI 生成人脸已经达到什么水平</a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="discussTop">
+                                <h6>
+                                    <img src="__IMG__/mess.png" alt="">
+                                    <span>我的评论我的评论我的评论我的评论</span>
+                                </h6>
+                                <span>
+                                            <img src="__IMG__/del.png" alt="">
+                                        </span>
+                            </div>
+
+                            <div class="discussfont">
+                                <span>评论文章:</span>
+                                <a href="list.html">99% 的人并不知道 AI 生成人脸已经达到什么水平</a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="discussTop">
+                                <h6>
+                                    <img src="__IMG__/mess.png" alt="">
+                                    <span>我的评论我的评论我的评论我的评论</span>
+                                </h6>
+                                <span>
+                                            <img src="__IMG__/del.png" alt="">
+                                        </span>
+                            </div>
+
+                            <div class="discussfont">
+                                <span>评论文章:</span>
+                                <a href="list.html">99% 的人并不知道 AI 生成人脸已经达到什么水平</a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="discussTop">
+                                <h6>
+                                    <img src="__IMG__/mess.png" alt="">
+                                    <span>我的评论我的评论我的评论我的评论</span>
+                                </h6>
+                                <span>
+                                            <img src="__IMG__/del.png" alt="">
+                                        </span>
+                            </div>
+
+                            <div class="discussfont">
+                                <span>评论文章:</span>
+                                <a href="list.html">99% 的人并不知道 AI 生成人脸已经达到什么水平</a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="discussTop">
+                                <h6>
+                                    <img src="__IMG__/mess.png" alt="">
+                                    <span>我的评论我的评论我的评论我的评论</span>
+                                </h6>
+                                <span>
+                                            <img src="__IMG__/del.png" alt="">
+                                        </span>
+                            </div>
+
+                            <div class="discussfont">
+                                <span>评论文章:</span>
+                                <a href="list.html">99% 的人并不知道 AI 生成人脸已经达到什么水平</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!--/discuss-->
+            </div><!--/profileList-->
+        </div><!--/profileAuto-->
+    </div><!--/profileCount-->
+
+</block>
+<block name="jsDiv">
+    <script type="text/javascript" >
+        $(function () {
+            $(".edit_a").click(function (event) {
+                $('.amendInp').show();
+                event.stopPropagation();
+            })
+
+            $(".amendInp").click(function (event) {
+                event.stopPropagation();
+            })
+            $("body").click(function () {
+                var $amendInp= $('.amendInp').val();
+                var $p  = $(".p_text");
+                $p.text($amendInp);
+                //
+
+                if( $p.text()==''){
+                    $p.text('还未添加我的签名');
+                }else{
+                    $p.text($amendInp);
+                }
+                $('.amendInp').hide();
+            })
+
+
+            //基本信息 账号设置 我的收藏 我的评论
+            $(".profileNav>a").click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+                var $a  = $(".profileNav>a").index($(this));
+                $(".profileList").removeClass('active');
+                $(".profileList").eq($a).addClass('active')
+            })
+
+            $('.profile_Click .profile_name>a').click(function () {
+                var $this = $(".profile_name>a").index($(this));
+                var prant =$('.profile_name>a').eq($this).parents();
+                prant.children(".profile_amend").show();
+                prant.children(".profile_amend").children("input").val( prant.children("p").text())
+                prant.children(".profile_name").hide();
+                $('.profile_name>a').each(function (e) {
+                    if($this!=e){
+                        $('.profile_name>a').eq(e).parents().children(".profile_amend").hide();
+                        $('.profile_name>a').eq(e).parents().children(".profile_name").show();
+                    }
+                })
+            })
+
+            //性别
+            $(".profile_label>label").click(function () {
+                var $em =  $(this).children('em').text();
+                $(".p_sex").text($em)
+            })
+            //生日
+            $.ms_DatePicker({
+                YearSelector: ".sel_year",
+                MonthSelector: ".sel_month",
+                DaySelector: ".sel_day"
+            });
+
+            $(".btnBridthday").click(function () {
+                var $year = $(this).parent('.profile_amend').children('.sel_year').val(),
+                    $month= $(this).parent('.profile_amend').children('.sel_month').val(),
+                    $day =$(this).parent('.profile_amend').children('.sel_day').val();
+                $(".p_brithday").text($year +" - "+ $month +" - "+ $day)
+            })
+
+            //保存
+            $(".btn_sava").click(function () {
+                var $inp = $(this).parent('.profile_amend').children('input').val();
+                var $p_name = $(this).parents('.profile_Click').children('.profile_name').children('.p_name'); // 昵称
+                $p_name.text($inp); //昵称
+                $(this).parent('.profile_amend').hide();
+                $(this).parents('.profile_Click').children('.profile_name').show();
+                //console.log($inp)
+            })
+
+
+
+            $(".btn_cancel").click(function () {
+                $(".profile_amend").hide();
+                $(".profile_name").show();
+            })
+
+        })
+
+    </script>
+</block>

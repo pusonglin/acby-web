@@ -1,0 +1,200 @@
+<extend name="public/base" />
+<block name='js'>
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.config.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/ueditor.all.min.js" />
+    <js href="__COMMON__/ueditor-1.4.3.1/lang/zh-cn/zh-cn.js" />
+    <js href="__JS__/ueditor.js" />
+    <!--<js href="__JS__/library-doParty.js" />-->
+</block>
+<block name="body">
+    <section class="rt_wrap content">
+        <div class="rt_content">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">{$title}</li>
+                    <button class="layui-btn layui-btn-primary layui-btn-sm fr" onclick="layer_close_iframe()">返回列表</button>
+                </ul>
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="tab-item-content">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>标题</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title"  lay-verify="required" placeholder="请填写标题" autocomplete="off" class="layui-input" value="{$cur.title}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>分类</label>
+                                    <div class="layui-input-block" id="IsReject">
+                                        <volist name="firstList" id="v">
+                                            <input type="radio" name="first_cate_id" lay-filter="first_cate_id" value="{$v.id}" title="{$v.name}" <eq name="cur.first_cate_id" value="$v.id"> checked="checked"</eq> />
+                                        </volist>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>类别</label>
+                                    <div class="layui-input-block" id="second_cate_id">
+                                        <volist name="secondList" id="v2">
+                                            <input type="radio" name="second_cate_id" value="{$v2.id}" title="{$v2.name}" <eq name="cur.second_cate_id" value="$v2.id"> checked="checked"</eq> />
+                                        </volist>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>主题</label>
+                                    <div class="layui-input-block">
+                                        <notempty name="typeList">
+                                            <volist name="typeList" id="v">
+                                                <input type="checkbox"  value="{$v.id}" title="{$v.name}" lay-filter="typeO" <eq name="v.isCheck" value="1"> checked=""</eq>>
+                                            </volist>
+                                            <else/>
+                                            <div style="line-height: 36px;color: red">请先添加主题</div>
+                                        </notempty>
+                                        <input type="hidden" name="type" id="type">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>简介</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="summary"  lay-verify="required" placeholder="请填写简介" autocomplete="off" class="layui-input" value="{$cur.summary}" />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label"><b class="is_must">*</b>详情</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="content" id="content" lay-verify="required" placeholder="请填写详情" class="layui-textarea layui-editor">{$cur.content}</textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">封面</label>
+                                    <div class="layui-input-block uploadImg">
+                                        <div>
+                                            <ul class="imgbox" data-max="3" data-setcover="2">
+                                                <notempty name="cur.cover">
+                                                    <volist name="cur.cover" id="v">
+                                                        <li>
+                                                            <a href="{$v}" rel="group"><img src="{$v}" class="img"></a>
+                                                            <span class="fa fa-times up_del_btn on_show" title="删除"></span>
+                                                        </li>
+                                                    </volist>
+                                                </notempty>
+                                                <input type="hidden" name="cover" placeholder="请上传封面图片" value='{$cur.cover_json}' class="layui-input">
+                                            </ul>
+                                            <ul class="btnup" onclick="upImage('cover')">
+                                                <i id="cover" style="display: none;"></i>
+                                                <span class="fa fa-upload"><br/><br/>上传图片</span>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <span class="justTips"><i class="fa fa-exclamation-triangle"></i> 图片建议尺寸：800*600px；图片格式：jpg，png，jpeg，gif</span>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">附件上传</label>
+                                    <div class="layui-input-block">
+                                        <div class="file-box">
+                                            <volist name="cur.attachment" id="v">
+                                                <span class="file-list" data-title="{$v.title}" data-url="{$v.url}" data-size="{$v.size}" data-type="{$v.type}">{$v.title}<i title="删除">x</i></span>
+                                            </volist>
+                                            <i id="file" style="display: none;"></i>
+                                            <a href="javascript:;" class="attachment_btn" onclick="upFile('file')">上传附件</a>
+                                            <span class="justTips"><i class="fa fa-exclamation-triangle"></i> (支持格式：pdf,word,excel，文件大小不超过20M)</span>
+                                            <input name="attachment" type="hidden" value='{$cur.attachment_json}' class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>作者</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="source" lay-verify="required" placeholder="文章作者" autocomplete="off" class="layui-input" value="{$cur.source}" maxlength="10"/>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><b class="is_must">*</b>是否发布</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="status" value="1" title="是" <neq name="cur.status" value="2"> checked="checked"</neq> />
+                                        <input type="radio" name="status" value="2" title="否" <eq name="cur.status" value="2"> checked="checked"</eq> />
+                                    </div>
+                                </div>
+                                <div class="layui-form-item <gt name='cur.id' value='0'> hide_list </gt>">
+                                    <label class="layui-form-label"><b class="is_must">*</b>创建时间</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="create_time" placeholder="请填写创建时间" autocomplete="off" class="layui-input laydate-time" value="{$cur.create_time}">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item box-bottom">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formSubmit" data-id="{$cur.id}" data-url="{:url('doneParty')}" data-back="{:url('index')}">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="footer">
+    <script type="text/javascript">
+        var type_id="{$cur.type}";
+        var type=type_id.split(',');
+        //实例化ueditor
+        UE.getEditor('content');
+
+        //封面图片上传
+        upload_imgs('cover');
+
+        //附件上传
+        upload_file('file');
+
+        //图片放大显示
+        fancyimg();
+        layui.use('form',function () {
+            var form=layui.form;
+            form.on('checkbox(typeO)', function(obj){
+                var id=obj.value;
+               if(obj.elem.checked==true){
+                    type.push(id);
+               }else{
+                   var index = type.indexOf(id);
+                   if (index > -1) {
+                       type.splice(index, 1);
+                   }
+               }
+               $('#type').val(type.join(','));
+            });
+
+            form.on('radio(first_cate_id)', function (data) {
+                var id=$('#IsReject input[name="first_cate_id"]:checked ').val();
+                //$('#second_cate_id').empty();
+                $.ajax({
+                    type: "post",
+                    url: '/document/getSecondList',
+                    data: {pid:id},
+                    async: false,
+                    dataType: 'json',
+                    success: function (d) {
+                        if(d.length>0){
+                            var str='';
+                            $.each(d,function (i,v) {
+                                console.log(v)
+                                str+='<input type="radio" name="second_cate_id" value="'+v['id']+'" title="'+v['name']+'" />';
+                                str+='<div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>'+v['name']+'</div></div>';
+                            })
+                            $('#second_cate_id').html(str);
+                        }else{
+                            $('#second_cate_id').html('请先添加分类');
+                        }
+                    }
+                });
+                var h = $('.body-box').height();
+                top.reinitIframe(h);
+                form.render()
+            });
+        })
+
+
+    </script>
+</block>
